@@ -1,0 +1,136 @@
+.itens-form{
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+
+    gap: 10px;
+}
+#color-bg{
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 16px #d9d9d9, -5px -5px 16px #e7e7e7;
+    padding-bottom: 2rem;
+}
+.itens-form-text{
+    display: flex;
+    margin-top: 1rem;
+    gap: 10px;
+}
+.tx-form{
+    display: flex;
+    margin-left: 22px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+.edit-label{
+    margin-right: 5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+.form-edit-section-size {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .form-edit-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  .img-form-input img {
+    width: 400px;
+    max-width: 95%;
+
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+  }
+  
+  .uploaded-image {
+    max-width: 100%;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .custom-uploaded-image {
+    width: 300px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 12px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+    outline: none;
+    color: dimgray;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .input:invalid {
+    animation: justshake 0.3s forwards;
+    color: red;
+  }
+  
+  @keyframes justshake {
+    25% {
+      transform: translateX(5px);
+    }
+  
+    50% {
+      transform: translateX(-5px);
+    }
+  
+    75% {
+      transform: translateX(5px);
+    }
+  
+    100% {
+      transform: translateX-(5px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .form-edit-section-size {
+      flex-direction: column;
+    }
+  
+    .img-form-input img {
+      width: 100%;
+    }
+  }
+  
+  /* Estilos para telas entre 601px e 1200px */
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .form-edit-section-size {
+      flex-wrap: wrap;
+    }
+  
+    .form-edit-section {
+      width: 50%;
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
+  
+    .img-form-input {
+      width: 50%;
+      text-align: center;
+    }
+  
+    .img-form-input img {
+      max-width: 100%;
+      height: auto;
+    }
+  }

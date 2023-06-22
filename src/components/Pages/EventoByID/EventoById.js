@@ -16,12 +16,26 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Tabela from "../../Tabela/Tabela";
 import { Link } from "react-router-dom";
 import Footer from "../../Footer/Footer";
+import Evento2 from "../../../Imagens/evento2.png"
+import Evento3 from "../../../Imagens/evento3.png"
+import Evento4 from "../../../Imagens/evento4.png"
+import Evento5 from "../../../Imagens/evento5.png"
+import Evento6 from "../../../Imagens/evento6.png"
+import Evento7 from "../../../Imagens/evento7.png"
+import evento8 from "../../../Imagens/evento8.png"
+import video2 from "../../../Imagens/video2.png"
+import video3 from "../../../Imagens/video3.png"
+
+
+
+
 
 const EventoById = () => {
   return (
     <div>
       <NavBar />
       <Banner4 />
+      <div className="content-container"></div>
       <div className="tx-cont container Section_Prosen">
         <h1>Mostra de Projeto & Pesquisa Científica 2023.1</h1>
       </div>
@@ -92,25 +106,25 @@ const EventoById = () => {
             <img src={Foto1} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={Evento2} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={Evento3} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={Evento4} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={Evento5} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={Evento6} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={Evento7} alt="Foto do evento" />
           </div>
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img src={evento8} alt="Foto do evento" />
           </div>
         </div>
       </div>
@@ -126,10 +140,10 @@ const EventoById = () => {
             <img src={ImageVideo} alt="Video do evento" />
           </div>
           <div>
-            <img src={ImageVideo} alt="Video do evento" />
+            <img src={video2} alt="Video do evento" />
           </div>
           <div>
-            <img src={ImageVideo} alt="Video do evento" />
+            <img src={video3} alt="Video do evento" />
           </div>
         </div>
       </div>

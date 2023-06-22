@@ -44,8 +44,7 @@ function Equipe() {
               <br /> acadêmica ministrando aulas em cursos de qualificação
               profissional, ensino técnico e superior além de
               <br /> trabalhar em projetos de desenvolvimento Web como
-              freelancer. Atualmente exerce a função de Gestor
-              <br /> Mis da Qualidade na empresa Tel Centro de Contatos.
+              freelancer. Atualmente exerce a função Gerente de Informações<br/> Gerenciais (MIS)  na empresa Tel Centro de Contatos.
             </p>
             <div id="icons-divs">
               <AiOutlineMail id="icons-equipe" />

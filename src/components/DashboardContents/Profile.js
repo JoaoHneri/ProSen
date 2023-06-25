@@ -3,6 +3,8 @@ import imgEquipe2 from "../../Imagens/foto1.jpg"
 import "../Styles/StyleContents/Profile.css"
 import {BiEdit} from "react-icons/bi"
 
+
+
 function Profile(){
     return(
     <>

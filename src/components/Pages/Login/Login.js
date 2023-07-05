@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import NavBar from "../../Navbar/Navbar";
 import "../../Styles/Login.css"
 import BannerLogin from "../../Section-Banner/BannerLogin";
@@ -7,8 +8,28 @@ import {AiFillLock} from "react-icons/ai"
 import {FaUserAlt} from "react-icons/fa"
 import logoForm from "../../../Imagens/logo-form.png"
 import { Link } from "react-router-dom";
+import api from "../../../Services/Api"
 
 function Login(){
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+  
+    const handleLogin = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await api.post("http://localhost:3333/auth/login", {
+          email,
+          password,
+        });
+        alert("opas")
+        console.log(response.data); 
+    
+      } catch (error) {
+        console.error(error);
+      }
+    };
     return(
         <>
         <NavBar/>
@@ -24,18 +45,23 @@ function Login(){
                         <h3>Conta ProSen</h3>
                         <img alt="" id="logo-form" src={logoForm}/>
                     </div>
-                          <form>
+                          <form onSubmit={handleLogin}>
                                 <div class="inputbox">
-                                    <input type="text" placeholder="Email" required="required" />
+                                    <input type="text"
+                                     placeholder="Email" required="required"  value={email}
+                                     onChange={(e) => setEmail(e.target.value)} />
                                     <i class="icon"><FaUserAlt id="icon-form-user"/></i>
                                     
                                 </div>
                                 <div class="inputbox">
-                                    <input type="text" placeholder="Senha" required="required" />
+                                    <input type="password" placeholder="Senha" required="required"
+                                     value={password}
+                                     onChange={(e) => setPassword(e.target.value)}
+                                      />
                                     <i class="icon"><AiFillLock id="icon-form" /></i>
                                    
                                 </div>
-                                <Link to="dashboard">
+                                <Link to="/dashboard">
                                 <div class="div-button">
                                     <button class="btn-form" type="submit">ACESSAR</button>
                                 </div>

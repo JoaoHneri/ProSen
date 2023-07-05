@@ -28,7 +28,7 @@ function NavBar() {
               Contato
             </Nav.Link>
             <div className='link-nav-login'>
-              <Link to={'/dashboard'}>
+              <Link to={'/login'}>
                 <Nav.Link id="link-nav" href="#link">
               Conta ProSen
             </Nav.Link>

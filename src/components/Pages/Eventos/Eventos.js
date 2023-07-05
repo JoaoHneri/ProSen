@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../../Navbar/Navbar";
 import Banner3 from "../../Section-Banner/Banner3";
 import Search from "../../../Imagens/search.png";
@@ -6,8 +6,25 @@ import "../../Styles/Eventos.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import CardEvent from "../../CardEvent/CardEvent";
 import Footer from "../../Footer/Footer";
+import api from "../../../Services/api";
 
 const Eventos = () => {
+
+
+  async function getEvents() {
+    try {
+      const userData = await api.get("event", {
+      });
+      const userInfo = userData.data;
+      console.log(userInfo);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    getEvents();
+  },[])
+
   return (
     <div>
       <NavBar />

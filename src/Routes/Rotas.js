@@ -9,6 +9,8 @@ import Login from "../components/Pages/Login/Login";
 import PublicarProjeto from "../components/Pages/publicarProjeto/PublicarProjeto";
 import PublicarEvento from "../components/Pages/PublicarEvento/PublicarEvento";
 import Dashboard from "../components/Pages/Dashboard/Dashboard"
+import { useContext } from "react";
+import { UserContext } from "../components/useContext/UserContext";
 
 function ToTop() {
   const { pathname } = useLocation();
@@ -19,6 +21,7 @@ function ToTop() {
 }
 
 const Rotas = () => {
+  const [userData, setUserData] = useContext(UserContext);
   return (
     <Router>
       <ToTop />

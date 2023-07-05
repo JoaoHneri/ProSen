@@ -4,7 +4,6 @@ import "../Styles/InputFile.css"
 import { AiOutlinePlus } from 'react-icons/ai';
 const FileUpload = () => {
   const [files, setFiles] = useState([]);
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: 'image/*',
     multiple: true,

@@ -28,12 +28,10 @@ const Rotas = () => {
       <Routes>
         <Route exact path="/" Component={Home} />
         <Route exact path="/eventos" Component={Eventos} />
-        <Route exact path="/eventos/id" Component={EventoById} />
+        <Route exact path="/eventos/:id" Component={EventoById} />
         <Route exact path="/repositorios" Component={Respositorios} />
         <Route exact path="/equipe" Component={Equipe} />
         <Route exact path="/login" Component={Login}/>
-        <Route exact path="/publicarProjeto" Component={PublicarProjeto}/>
-        <Route exact path="/publicarEvento" Component={PublicarEvento}/>
         <Route exact path="/Dashboard" Component={Dashboard}/>
       </Routes>
     </Router>

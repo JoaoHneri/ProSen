@@ -12,16 +12,23 @@ import { UserContext } from "../useContext/UserContext";
 const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);
   const [files, setFiles] = useState([]);
-  const [formData, setFormData] = useState({
-    user_id: userData.id,
-    local: "",
-    title: "",
-    hour: "",
-    type: "",
-    descricao: "",
-    startDate: "",
-    file: null,
-  });
+  const [title, setTitle] = useState("");
+  const [startDate, setStateDate] = useState("");
+  const [hour, setHour] = useState("");
+  const [local, setLocal] = useState("");
+  const [type, setType] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [file, setFile] = useState(null);
+
+  // console.log(title)
+  // console.log(startDate)
+  // console.log(hour)
+  // console.log(local)
+  // console.log(type)
+  // console.log(descricao)
+
+
+
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/*",
@@ -39,13 +46,6 @@ const PublicarEvento = () => {
     });
   };
 
-  const handleChange = (e) => {
-    if (e.target.name === "file") {
-      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
-    } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
-  };
 
   const formatDate = (date) => {
     return date.replace(/\D/g, "");
@@ -57,29 +57,31 @@ const PublicarEvento = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const url = "/event"; // Sua rota /event aqui
+      const userId = userData.id;
       const data = new FormData();
-      data.append("user_id", userData.id);
-      data.append("local", formData.local);
-      data.append("title", formData.title);
-      data.append("hour", formatTime(formData.hour));
-      data.append("type", formData.type);
-      data.append("descricao", formData.descricao);
-      data.append("startDate", formatDate(formData.startDate));
-      data.append("file", formData.file);
-
+      data.append("user_id", userId);
+      data.append("local", local);
+      data.append("title", title);
+      data.append("hour", formatTime(hour));
+      data.append("type", type);
+      data.append("descricao", descricao);
+      data.append("startDate", formatDate(startDate));
+      data.append("file", file);
+  
       const response = await api.post(url, data);
-
+  
       console.log(response.data); // Mensagem de sucesso e dados do evento
-
+  
       // Faça algo com a resposta, como redirecionar para outra página
     } catch (error) {
       console.error(error);
       // Trate o erro aqui
     }
   };
+  
 
   return (
     <>
@@ -97,8 +99,8 @@ const PublicarEvento = () => {
                     type="text"
                     name="title"
                     className="input"
-                    value={formData.title}
-                    onChange={handleChange}
+                    value={title}
+                    onChange={(e)=>{setTitle(e.target.value)}}
                   />
                 </div>
                 <div className="itens-form">
@@ -107,16 +109,16 @@ const PublicarEvento = () => {
                     type="date"
                     name="startDate"
                     className="input"
-                    value={formData.startDate}
-                    onChange={handleChange}
+                    value={startDate}
+                    onChange={(e)=>{setStateDate(e.target.value)}}
                   />
                   <label className="edit-label">Horário:</label>
                   <input
                     type="time"
                     name="hour"
                     className="input"
-                    value={formData.hour}
-                    onChange={handleChange}
+                    value={hour}
+                    onChange={(e)=>{setHour(e.target.value)}}
                   />
                 </div>
                 <div className="itens-form">
@@ -124,27 +126,28 @@ const PublicarEvento = () => {
                   <select
                     name="local"
                     className="input"
-                    value={formData.local}
-                    onChange={handleChange}
+                    value={local}
+                    onChange={(e)=>{setLocal(e.target.value)}}
                   >
-                    <option value="valor1">Valor 1</option>
-                    <option value="valor2" selected>
-                      Valor 2
+                    <option value="">Selecione o Local do Evento</option>
+                    <option value="Senai - Feira de Santana">Senai - Feira de Santana</option>
+                    <option value="Senai - Salvador" >
+                      Senai - Salvador
                     </option>
-                    <option value="valor3">Valor 3</option>
                   </select>
                   <label className="edit-label">Modalidade:</label>
                   <select
                     name="type"
                     className="input"
-                    value={formData.type}
-                    onChange={handleChange}
+                    value={type}
+                    onChange={(e)=>{setType(e.target.value)}}
                   >
-                    <option value="valor1">Valor 1</option>
-                    <option value="valor2" selected>
-                      Valor 2
+                    <option value="">Selecione o tipo do evento</option>
+                    <option value="Evento Presencial">Evento Presencial</option>
+                    <option value="Evento a distância" >
+                      Evento A Distância
                     </option>
-                    <option value="valor3">Valor 3</option>
+
                   </select>
                 </div>
                 <div className="itens-form-text">
@@ -157,8 +160,8 @@ const PublicarEvento = () => {
                     id="formDescricao"
                     rows="3"
                     placeholder="Digite a descrição"
-                    value={formData.descricao}
-                    onChange={handleChange}
+                    value={descricao}
+                    onChange={(e)=>{setDescricao(e.target.value)}}
                   ></textarea>
                 </div>
               </div>
@@ -169,7 +172,7 @@ const PublicarEvento = () => {
             <div className="ftn-file">
               <h5>Fotos do Evento</h5>
               <div className="input-file-edit">
-                <div
+                {/* <div
                   {...getRootProps()}
                   className={`dropzone ${isDragActive ? "active" : ""}`}
                 >
@@ -177,40 +180,8 @@ const PublicarEvento = () => {
                   <p>
                     Arraste e solte os arquivos aqui ou clique para selecionar.
                   </p>
-                </div>
-
-                {files.length > 0 && (
-                  <div>
-                    <h4>Pré-visualizações:</h4>
-                    <div className="preview-container">
-                      {files.slice(0, 4).map((file, index) => (
-                        <div key={index} className="preview-item">
-                          <img
-                            src={URL.createObjectURL(file)}
-                            alt={`Preview ${index}`}
-                            className="preview-image"
-                          />
-                          <button onClick={() => removeFile(index)}>
-                            Remover
-                          </button>
-                        </div>
-                      ))}
-                      <div
-                        {...getRootProps()}
-                        className={`dropzone-edit ${
-                          isDragActive ? "active" : ""
-                        }`}
-                      >
-                        <input {...getInputProps()} />
-                        <p>
-                          {" "}
-                          <AiOutlinePlus id="edit-icon-input" />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <input type="file" name="file" onChange={handleChange} />
+                </div> */}
+                <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
               </div>
             </div>
             {/* <div className="ftn-file">

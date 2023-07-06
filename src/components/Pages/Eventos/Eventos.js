@@ -6,7 +6,7 @@ import "../../Styles/Eventos.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import CardEvent from "../../CardEvent/CardEvent";
 import Footer from "../../Footer/Footer";
-import api from "../../../Services/api";
+import api from "../../../services/api";
 
 const Eventos = () => {
 

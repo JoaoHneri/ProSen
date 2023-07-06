@@ -7,7 +7,7 @@ import { AiFillLock } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import logoForm from "../../../Imagens/logo-form.png";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../../Services/api";
+import api from "../../../services/api";
 import { useContext } from "react";
 import { UserContext } from "../../useContext/UserContext";
 

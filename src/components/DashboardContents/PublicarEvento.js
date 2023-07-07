@@ -42,6 +42,10 @@ const PublicarEvento = () => {
       setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
     },
   });
+  const handleFileSelect = () => {
+    inputFileRef.current.click();
+  };
+  
 
   const removeFile = (index) => {
     setFiles((prevFiles) => {
@@ -218,21 +222,22 @@ const PublicarEvento = () => {
                       <span>{file.name}</span>
                     </div>
                   ) : (
-                    <label htmlFor="fileInput" className="fileInputContainer">
-                      <span className="labelText">
-                        <div><img id="UpIconAdd" src={AddImageEvent} alt="Arraste o arquivo"/></div>
-                      </span>
-                      <input
-                        ref={inputFileRef}
-                        id="fileInput"
-                        type="file"
-                        style={{ display: "none" }}
-                        name="file"
-                        onChange={(e) => {
-                          setFile(e.target.files[0]);
-                        }}
-                      />
-                    </label>
+                    <label htmlFor="fileInput" className="fileInputContainer" onClick={handleFileSelect}>
+  <span className="labelText">
+    <div><img id="UpIconAdd" src={AddImageEvent} alt="Arraste o arquivo"/></div>
+  </span>
+  <input
+    ref={inputFileRef}
+    id="fileInput"
+    type="file"
+    style={{ display: "none" }}
+    name="file"
+    onChange={(e) => {
+      setFile(e.target.files[0]);
+    }}
+  />
+</label>
+
                   )}
                 </div>
               </div>

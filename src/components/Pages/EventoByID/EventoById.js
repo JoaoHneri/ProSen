@@ -16,40 +16,36 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Tabela from "../../Tabela/Tabela";
 import { Link } from "react-router-dom";
 import Footer from "../../Footer/Footer";
-import Evento2 from "../../../Imagens/evento2.png"
-import Evento3 from "../../../Imagens/evento3.png"
-import Evento4 from "../../../Imagens/evento4.png"
-import Evento5 from "../../../Imagens/evento5.png"
-import Evento6 from "../../../Imagens/evento6.png"
-import Evento7 from "../../../Imagens/evento7.png"
-import evento8 from "../../../Imagens/evento8.png"
-import video2 from "../../../Imagens/video2.png"
-import video3 from "../../../Imagens/video3.png"
+import Evento2 from "../../../Imagens/evento2.png";
+import Evento3 from "../../../Imagens/evento3.png";
+import Evento4 from "../../../Imagens/evento4.png";
+import Evento5 from "../../../Imagens/evento5.png";
+import Evento6 from "../../../Imagens/evento6.png";
+import Evento7 from "../../../Imagens/evento7.png";
+import evento8 from "../../../Imagens/evento8.png";
+import video2 from "../../../Imagens/video2.png";
+import video3 from "../../../Imagens/video3.png";
 import { useParams } from "react-router-dom";
 import api from "../../../services/api";
 
-
-
-
-
 const EventoById = () => {
   const [Event, setEvent] = useState();
-  const {id} = useParams();
-  const [projetoFiltrado, setProjetoFiltrado] = useState('');
+  const { id } = useParams();
+  const [projetoFiltrado, setProjetoFiltrado] = useState("");
 
-  useEffect(()=>{
-    async function getEventById(){
+  useEffect(() => {
+    async function getEventById() {
       try {
         const event = await api.get(`/event/${id}`);
-        const {data} = event;
+        const { data } = event;
         setEvent(data);
-        console.log(event)
+        console.log(event);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-    getEventById()
-  },[id]);
+    getEventById();
+  }, [id]);
 
   function formatarDataBrasileira(data) {
     const dateObj = new Date(data);
@@ -60,35 +56,39 @@ const EventoById = () => {
 
     return `${dia}/${mes}/${ano}`;
   }
+
+  function formatarHora(hora) {
+    const horaFormatada = hora.substring(0, 2) + ":" + hora.substring(2);
+    return horaFormatada;
+  }
   
   
+
   return (
     <div>
       <NavBar />
       <Banner4 />
       <div className="content-container"></div>
       <div className="tx-cont container Section_Prosen">
-        <h1>{Event ? Event.title : 'Carregando' }</h1>
+        <h1>{Event ? Event.title : "Carregando"}</h1>
       </div>
       <div className="container informs">
         <div className="paragrafs">
-          <p>
-            {Event ? Event.descricao : 'Carregando' }
-          </p>
+          <p>{Event ? Event.descricao : "Carregando"}</p>
         </div>
         <div className="details">
           <p>
             <img src={DateIcon} alt="Data do Evento" className="m-1" />
-            {Event ? formatarDataBrasileira(Event.startDate) : 'Carregando' }
+            {Event ? formatarDataBrasileira(Event.startDate) : "Carregando"}
           </p>
 
           <p>
             <img className="m-1" src={Time} alt="Horário do Evento" />
-            {Event ? Event.hour : 'Carregando' }
+            {Event ? formatarHora(Event.hour) : "Carregando"}
           </p>
           <p>
             <img className="m-1" src={Location} alt="Localização do Evento" />
-            {Event ? Event.local : 'Carregando' }
+            {Event ? Event.local : "Carregando"}
           </p>
           <p className="eventTypes m-1">
             <div className="userEvent">
@@ -96,7 +96,7 @@ const EventoById = () => {
               <img className="user" src={User} alt="Tipo de Evento" />
               <img src={baseUser} alt="Tipo de Evento" />
             </div>
-            {Event ? Event.type : 'Carregando' }
+            {Event ? Event.type : "Carregando"}
           </p>
         </div>
       </div>
@@ -109,7 +109,15 @@ const EventoById = () => {
         </div>
         <div className="divFotos">
           <div>
-            <img className="imageToPost" src={Event ? `${process.env.REACT_APP_API}temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
+            <img
+              className="imageToPost"
+              src={
+                Event
+                  ? `${process.env.REACT_APP_API}temp/uploads/${Event.src.key}`
+                  : "carregando"
+              }
+              alt="Foto do evento"
+            />
           </div>
           <div>
             <img src={Foto1} alt="Foto do evento" />
@@ -161,7 +169,9 @@ const EventoById = () => {
               type="text"
               className="eventsSearch"
               placeholder="Buscar Trabalhos..."
-              onChange={(e)=>{setProjetoFiltrado(e.target.value)}}
+              onChange={(e) => {
+                setProjetoFiltrado(e.target.value);
+              }}
             />
             <button className="Search-btn">
               <img src={Search} alt="Busque Trabalhos" />
@@ -182,16 +192,15 @@ const EventoById = () => {
           </div>
         </div>
         <div className="sessionTable">
-          <Tabela projetoFiltrado={projetoFiltrado}/>
+          <Tabela projetoFiltrado={projetoFiltrado} />
           <div className="seeButton finish">
-        <Link to={'/repositorios'}>
-          <button className="buttonCards">Carregar mais</button>
-        </Link>
-        
-      </div>
+            <Link to={"/repositorios"}>
+              <button className="buttonCards">Carregar mais</button>
+            </Link>
+          </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

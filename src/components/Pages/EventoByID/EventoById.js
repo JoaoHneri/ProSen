@@ -35,6 +35,7 @@ import api from "../../../services/api";
 const EventoById = () => {
   const [Event, setEvent] = useState();
   const {id} = useParams();
+  const [projetoFiltrado, setProjetoFiltrado] = useState('');
 
   useEffect(()=>{
     async function getEventById(){
@@ -108,7 +109,7 @@ const EventoById = () => {
         </div>
         <div className="divFotos">
           <div>
-            <img className="imageToPost" src={Event ? `http://localhost:3333/temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
+            <img className="imageToPost" src={Event ? `${process.env.REACT_APP_API}/temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
           </div>
           {/* <div>
             <img src={Evento2} alt="Foto do evento" />
@@ -160,6 +161,7 @@ const EventoById = () => {
               type="text"
               className="eventsSearch"
               placeholder="Buscar Trabalhos..."
+              onChange={(e)=>{setProjetoFiltrado(e.target.value)}}
             />
             <button className="Search-btn">
               <img src={Search} alt="Busque Trabalhos" />
@@ -180,7 +182,7 @@ const EventoById = () => {
           </div>
         </div>
         <div className="sessionTable">
-          <Tabela />
+          <Tabela projetoFiltrado={projetoFiltrado}/>
           <div className="seeButton finish">
         <Link to={'/repositorios'}>
           <button className="buttonCards">Carregar mais</button>

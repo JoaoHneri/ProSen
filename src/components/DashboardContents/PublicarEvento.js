@@ -20,39 +20,17 @@ const PublicarEvento = () => {
   const [descricao, setDescricao] = useState("");
   const [file, setFile] = useState(null);
 
-  // console.log(title)
-  // console.log(startDate)
-  // console.log(hour)
-  // console.log(local)
-  // console.log(type)
-  // console.log(descricao)
-
-
-
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
-    multiple: true,
-    onDrop: (acceptedFiles) => {
-      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-    },
-  });
-
-  const removeFile = (index) => {
-    setFiles((prevFiles) => {
-      const newFiles = [...prevFiles];
-      newFiles.splice(index, 1);
-      return newFiles;
-    });
-  };
-
-
   const formatDate = (date) => {
     return date.replace(/\D/g, "");
   };
 
   const formatTime = (time) => {
     return time.replace(/\D/g, "");
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    setFiles(selectedFiles);
   };
 
   const handleSubmit = async (e) => {
@@ -69,7 +47,10 @@ const PublicarEvento = () => {
       data.append("type", type);
       data.append("descricao", descricao);
       data.append("startDate", formatDate(startDate));
-      data.append("file", file);
+      
+      files.forEach((file, index) => {
+        data.append(`file_${index}`, file);
+      });
   
       const response = await api.post(url, data);
   
@@ -147,7 +128,6 @@ const PublicarEvento = () => {
                     <option value="Evento a distância" >
                       Evento A Distância
                     </option>
-
                   </select>
                 </div>
                 <div className="itens-form-text">
@@ -171,23 +151,17 @@ const PublicarEvento = () => {
             </div>
             <div className="ftn-file">
               <h5>Fotos do Evento</h5>
+            
               <div className="input-file-edit">
-                {/* <div
-                  {...getRootProps()}
-                  className={`dropzone ${isDragActive ? "active" : ""}`}
-                >
-                  <input {...getInputProps()} />
-                  <p>
-                    Arraste e solte os arquivos aqui ou clique para selecionar.
-                  </p>
-                </div> */}
-                <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
+                <input type="file"  name="file" multiple onChange={handleFileChange} />
+              </div>
+              <div className="preview">
+                {files.map((file, index) => (
+                  <img key={index} src={URL.createObjectURL(file)} alt={`Preview ${index}`} />
+                ))}
               </div>
             </div>
-            {/* <div className="ftn-file">
-              <h5>Videos do Evento</h5>
-              <FileVideo />
-            </div> */}
+
             <div className="upArq">
               <button onClick={handleSubmit}>Publicar Evento</button>
             </div>

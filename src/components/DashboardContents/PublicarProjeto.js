@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,  useRef  } from 'react';
 import imgForm from "../../Imagens/imageForm.png"
 import "../Styles/StyleContents/PublicarProjeto.css";
 import api from "../../services/api";
@@ -23,7 +23,39 @@ const PublicarProjeto = () => {
   const [classProject, setClassproject] = useState('');
   const [authors, setAuthors] = useState('');
   const [file, setFile] = useState(null);
+  const inputFileRef = useRef(null);
+  const [isDragOver, setIsDragOver] = useState(false);
 
+  const handleDragEnter = (event) => {
+    event.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (event) => {
+    event.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    setIsDragOver(false);
+
+    const file = event.dataTransfer.files[0];
+    alert('Você soltou o arquivo: ' + file.name);
+  };
+
+  const handleSelectFile = () => {
+    inputFileRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    alert('Você selecionou o arquivo: ' + file.name);
+  };
 
   const formatDate = (date) => {
     return date.replace(/\D/g, "");
@@ -191,8 +223,27 @@ const PublicarProjeto = () => {
                 </div>
               </div>
               <div className="img-form-input">
-                <p>Anexar Arquivos do Projeto em (PDF)</p>
-                <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
+              <div
+        className={`input-container ${isDragOver ? 'drag-over' : ''}`}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onClick={handleSelectFile}
+      >
+        <input
+          ref={inputFileRef}
+          type="file"
+          style={{ display: 'none' }}
+          name="file" onChange={(e) => setFile(e.target.files[0])}
+        />
+        <div className="text-container">
+          <p>Arraste ou solte qualquer arquivo aqui</p>
+          <p>ou selecione o arquivo</p>
+        </div>
+      </div>
+          
+                
               </div>
             </div>
             <div className="upArq">

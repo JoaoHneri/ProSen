@@ -58,8 +58,9 @@ function Login() {
               <h3>Conta ProSen</h3>
               <img alt="" id="logo-form" src={logoForm} />
             </div>
-            <form>
-              <div class="inputbox">
+            <form> 
+              
+              <div class="inputbox-2">
                 <input
                   type="text"
                   placeholder="Email"
@@ -71,7 +72,7 @@ function Login() {
                   <FaUserAlt id="icon-form-user" />
                 </i>
               </div>
-              <div class="inputbox">
+              <div class="inputbox-2">
                 <input
                   type="text"
                   placeholder="Senha"

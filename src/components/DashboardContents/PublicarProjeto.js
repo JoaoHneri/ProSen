@@ -5,10 +5,7 @@ import api from "../../services/api";
 import { useContext } from "react";
 import { UserContext } from "../useContext/UserContext";
 import {FaUpload} from 'react-icons/fa'
-import Upload from '../../Imagens/Upload.png'
-
-import Select from "react-select";
-
+import Upload from '../../Imagens/Upload.png';
 
 const PublicarProjeto = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -39,7 +36,9 @@ const PublicarProjeto = () => {
       data.append("area", area);
       data.append("shift", shift);
       data.append("type", type);
-      data.append("date", date);
+      const formattedDate = new Date(date);
+      const formattedDateString = formattedDate.toISOString().split('T')[0];
+      data.append("date", formattedDateString);
       data.append("linkEvent", linkEvent);
       data.append("supervisor", supervisor);
       data.append("groupLeaderEmail", groupLeaderEmail);
@@ -67,20 +66,20 @@ const PublicarProjeto = () => {
   const handleDragOver = (e) => {
     e.preventDefault();
   };
+
   useEffect(() => {
-    async function getEvents(){
+    async function getEvents() {
       try {
         const events = await api.get('/event');
-        const {data} = events;
+        const { data } = events;
         setEvento(data.events);
-  
       } catch (error) {
         console.log(error)
       }
     }
     getEvents();
-  },[api])
- 
+  }, []);
+
   return (
     <>
       <div>
@@ -141,7 +140,8 @@ const PublicarProjeto = () => {
                     <option value="Noturno">Noturno</option>
                   </select>
                 </div>
-                <div className="itens-form">
+                <div className="itens-form```jsx
+">
                   <label className="edit-label">Tipo:</label>
                   <select
                     name="type"
@@ -161,18 +161,10 @@ const PublicarProjeto = () => {
                     name="startDate"
                     className="input"
                     value={date}
-                    onChange={(e)=>{setDate(e.target.value)}}
-                  />
-                  {/* <label className="edit-label">Data:</label>
-                  <input
-                    type="time"
-                    name="date"
-                    className="input"
-                    value={date}
                     onChange={(e) => {
                       setDate(e.target.value);
                     }}
-                  /> */}
+                  />
                 </div>
                 <div className="itens-form">
                   <label className="edit-label">Vincular ao Evento</label>
@@ -186,12 +178,11 @@ const PublicarProjeto = () => {
                   >
                     <option value=""></option>
                     {Evento.length > 0 ?
-                    Evento.map((events)=>(
-                      <option value={events.id}>{events.title}</option>
-                      
-                      )  )
-                      : <option value='Sem Eventos Postados no momento'>Ainda não Existe Eventos Postados</option>
-                  }
+                      Evento.map((events) => (
+                        <option value={events.id}>{events.title}</option>
+                      )) :
+                      <option value='Sem Eventos Postados no momento'>Ainda não Existe Eventos Postados</option>
+                    }
                   </select>
                 </div>
                 <div className="itens-form">
@@ -252,7 +243,6 @@ const PublicarProjeto = () => {
                         <p id="arrest">Arraste e solte o arquivo aqui</p>
                         <p id="or">ou <span id="sele">selecione o arquivo</span></p>
                       </span>
-                      
                       <input
                         ref={inputFileRef}
                         id="fileInput"
@@ -263,7 +253,6 @@ const PublicarProjeto = () => {
                           setFile(e.target.files[0]);
                         }}
                       />
-                      
                     </label>
                   )}
                 </div>

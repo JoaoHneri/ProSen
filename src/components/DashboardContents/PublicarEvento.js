@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef,useState } from "react";
 import imgForm from "../../Imagens/imageForm.png";
 import "../Styles/StyleContents/PublicarEvento.css";
 import FileVideo from "../Configs/InputVideo";
@@ -8,6 +8,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import api from "../../services/api";
 import { useContext } from "react";
 import { UserContext } from "../useContext/UserContext";
+import Upload from '../../Imagens/Upload.png'
+import AddImageEvent from '../../Imagens/AddImageEvent.png'
 
 const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);
@@ -19,6 +21,7 @@ const PublicarEvento = () => {
   const [type, setType] = useState("");
   const [descricao, setDescricao] = useState("");
   const [file, setFile] = useState(null);
+  const inputFileRef = useRef(null);
 
   // console.log(title)
   // console.log(startDate)
@@ -48,7 +51,9 @@ const PublicarEvento = () => {
 
 
   const formatDate = (date) => {
-    return date.replace(/\D/g, "");
+    const formattedDate = new Date(date);
+    const formattedDateString = formattedDate.toISOString().split('T')[0];
+    return formattedDateString;
   };
 
   const formatTime = (time) => {
@@ -80,6 +85,16 @@ const PublicarEvento = () => {
       console.error(error);
       // Trate o erro aqui
     }
+  };
+
+  const handleFileDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    setFile(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
   };
   
 
@@ -164,13 +179,59 @@ const PublicarEvento = () => {
                     onChange={(e)=>{setDescricao(e.target.value)}}
                   ></textarea>
                 </div>
-              </div>
-              <div className="img-form-input">
-                <img alt="" src={imgForm} />
+              </div>  
+              <div >
+                  
+                    <label htmlFor="fileInput" className="fileInputContainer">
+                      <span className="labelText">
+                        <div><img id="UpIcon" src={Upload} alt="Arraste o arquivo"/></div>
+                        <p id="arrest">Arraste e solte o arquivo aqui</p>
+                        <p id="or">ou <span id="sele">selecione o arquivo</span></p>
+                      </span>
+                      
+                      <input
+                        ref={inputFileRef}
+                        id="fileInput"
+                        type="file"
+                        style={{ display: "none" }}
+                        name="file"
+                      />
+                      
+                    </label>
               </div>
             </div>
             <div className="ftn-file">
               <h5>Fotos do Evento</h5>
+              <div className="img-form-input">
+                <div
+                  onDrop={handleFileDrop}
+                  onDragOver={handleDragOver}
+                >
+                  {file ? (
+                    <div>
+                      <span>Arquivo selecionado:</span>
+                      <br />
+                      <span>{file.name}</span>
+                    </div>
+                  ) : (
+                    <label htmlFor="fileInput" className="fileInputContainer">
+                      <span className="labelText">
+                        <div><img id="UpIconAdd" src={AddImageEvent} alt="Arraste o arquivo"/></div>
+                      </span>
+                      <input
+                        ref={inputFileRef}
+                        id="fileInput"
+                        type="file"
+                        style={{ display: "none" }}
+                        name="file"
+                        onChange={(e) => {
+                          setFile(e.target.files[0]);
+                        }}
+                      />
+                    </label>
+                  )}
+                </div>
+              </div>
               <div className="input-file-edit">
                 {/* <div
                   {...getRootProps()}
@@ -181,7 +242,7 @@ const PublicarEvento = () => {
                     Arraste e solte os arquivos aqui ou clique para selecionar.
                   </p>
                 </div> */}
-                <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
+                {/* <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} /> */}
               </div>
             </div>
             {/* <div className="ftn-file">

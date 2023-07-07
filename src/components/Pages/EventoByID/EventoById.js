@@ -109,7 +109,7 @@ const EventoById = () => {
         </div>
         <div className="divFotos">
           <div>
-            <img className="imageToPost" src={Event ? `${process.env.REACT_APP_API}/temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
+            <img className="imageToPost" src={Event ? `${process.env.REACT_APP_API}temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
           </div>
           <div>
             <img src={Foto1} alt="Foto do evento" />

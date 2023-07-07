@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../Navbar/Navbar";
 import Search from "../../../Imagens/search.png";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -11,6 +11,7 @@ import ArrowRight from "../../../Imagens/ArrowRight.png";
 import Footer from "../../Footer/Footer"
 
 const Respositorios = () => {
+  const [projetoFiltrado, setProjetoFiltrado] = useState('');
   return (
     <div>
       <Navbar />
@@ -26,6 +27,7 @@ const Respositorios = () => {
               type="text"
               className="repoSearch"
               placeholder="Buscar Trabalhos..."
+              onChange={(e)=>{setProjetoFiltrado(e.target.value)}}
             />
             <button className="Search-btn">
               <img src={Search} alt="Busque Trabalhos" />
@@ -47,7 +49,7 @@ const Respositorios = () => {
         </div>
       </div>
       <div className="container table-edit">
-        <Tabela/>
+      <Tabela projetoFiltrado={projetoFiltrado}/>
         <div className="controllers">
             <img src={ArrowLeft} alt="Voltar"/>
             <img src={Eclipse} alt="Numbers"/>

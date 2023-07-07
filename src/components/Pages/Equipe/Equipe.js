@@ -13,6 +13,7 @@ import imgEquipe7 from "../../../Imagens/Imagens Equipe/vinicius.png";
 import imgEquipe8 from "../../../Imagens/Imagens Equipe/silas.jpeg";
 import imgEquipe9 from "../../../Imagens/Imagens Equipe/jean.jpg";
 import imgEquipe10 from "../../../Imagens/Imagens Equipe/joao.jpeg";
+import Welber from "../../../Imagens/Imagens Equipe/welber 1.png"
 import "../../Styles/Equipe.css";
 
 function Equipe() {
@@ -44,7 +45,8 @@ function Equipe() {
               <br /> acadêmica ministrando aulas em cursos de qualificação
               profissional, ensino técnico e superior além de
               <br /> trabalhar em projetos de desenvolvimento Web como
-              freelancer. Atualmente exerce a função Gerente de Informações<br/> Gerenciais (MIS)  na empresa Tel Centro de Contatos.
+              freelancer. Atualmente exerce a função Gerente de Informações
+              <br /> Gerenciais (MIS) na empresa Tel Centro de Contatos.
             </p>
             <div id="icons-divs">
               <AiOutlineMail id="icons-equipe" />
@@ -76,22 +78,20 @@ function Equipe() {
             </div>
           </div>
         </div>
+
         <div class="image-container2">
           <img alt="" src={imgEquipe2} />
         </div>
       </div>
-      <div className="tx-cont container Section_Prosen">
-        <h1>Desing & Front End</h1>
-      </div>
       <div class="sec-equipe-1">
         <div class="image-container-s">
-          <img alt="" src={imgEquipe3} />
+          <img alt="" className={'imageAdmin'} src={Welber} />
         </div>
         <div class="sec-equipe-2">
           <div class="container edit1">
-            <h4 id="edit-tx-h4">Édfran de Almeida Pereira</h4>
+            <h4 id="edit-tx-h4">Welber Lima de Brito Guimarães</h4>
             <p id="edit-tx">
-            Cursando Desenvolvimento de Sistemas no SENAI - Feira de Santana e participante <br/>da Mostra Científica e Tecnológica de 2022, conquistando o 1º lugar. <br/>Com sua formação no ensino médio ecomprometimento com o programa  de estudos no SENAI, está adquirindo as habilidades técnicas <br/> e conhecimentos necessários para se destacar <br/>no campo do Desenvolvimento de Sistemas. Sua dedicação aos estudos<br/> e entusiasmo pela tecnologia o tornam um exemplo de estudante, sempre disposto a assumir novos projetos e desafios
+            Graduado em Administração, Pós-Graduado em Gestão Empresarial, iniciei minha trajetória profissional<br/> como Estagiário do SENAI, me tornei Assistente Administrativo, depois Analista de Suporte ao Negócio, <br/>atuei como Coordenador de Cursos na Região Norte e atualmente exerço a função de Coordenador de Cursos <br/>nas áreas de Gestão e Tecnologia da Informação no SENAI Feira de Santana.
             </p>
             <div id="icons-divs">
               <AiOutlineMail id="icons-equipe" />
@@ -100,12 +100,53 @@ function Equipe() {
           </div>
         </div>
       </div>
+      <div className="tx-cont container Section_Prosen">
+        <h1>Desing & Front End</h1>
+      </div>
+      
+      <div class="sec-equipe-1">
+        <div class="image-container-s">
+          <img alt="" src={imgEquipe3} />
+        </div>
+        <div class="sec-equipe-2">
+          <div class="container edit1">
+            <h4 id="edit-tx-h4">Édfran de Almeida Pereira</h4>
+            <p id="edit-tx">
+              Cursando Desenvolvimento de Sistemas no SENAI - Feira de Santana e
+              participante <br />
+              da Mostra Científica e Tecnológica de 2022, conquistando o 1º
+              lugar. <br />
+              Com sua formação no ensino médio ecomprometimento com o programa
+              de estudos no SENAI, está adquirindo as habilidades técnicas{" "}
+              <br /> e conhecimentos necessários para se destacar <br />
+              no campo do Desenvolvimento de Sistemas. Sua dedicação aos estudos
+              <br /> e entusiasmo pela tecnologia o tornam um exemplo de
+              estudante, sempre disposto a assumir novos projetos e desafios
+            </p>
+            <div id="icons-divs">
+              <AiOutlineMail id="icons-equipe" />
+              <AiFillLinkedin id="icons-equipe" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="sec-equipe-1">
         <div class="sec-equipe-2-v2">
           <div class="container edit1-v2">
             <h4 id="edit-tx-h4-v2">Tatiane Santiago Santana</h4>
             <p id="edit-tx-v2">
-            Graduanda em Licenciatura em Matemática pela UEFS e estudante do curso técnico de Desenvolvimento de Sistemas do SENAI - Bahia, com enorme paixão pela criação de soluções tecnológicas inovadoras. Ao longo do seu percursoacadêmico, tem buscado aprimorar constantemente suas habilidades na área de desenvolvimento web,<br/>  mobile e design de experiência do usuário. Aperfeiçoamentos através de cursos lhe permitiram adquirir um conhecimento sólido e prático nesses domínios, capacitando-a para criar interfaces intuitivas e visualmente atraentes. Busca constantemente por novas oportunidades de enfrentar desafios complexos com criatividade e determinação.
+              Graduanda em Licenciatura em Matemática pela UEFS e estudante do
+              curso técnico de Desenvolvimento de Sistemas do SENAI - Bahia, com
+              enorme paixão pela criação de soluções tecnológicas inovadoras. Ao
+              longo do seu percursoacadêmico, tem buscado aprimorar
+              constantemente suas habilidades na área de desenvolvimento web,
+              <br /> mobile e design de experiência do usuário. Aperfeiçoamentos
+              através de cursos lhe permitiram adquirir um conhecimento sólido e
+              prático nesses domínios, capacitando-a para criar interfaces
+              intuitivas e visualmente atraentes. Busca constantemente por novas
+              oportunidades de enfrentar desafios complexos com
+              criatividade e determinação.
             </p>
             <div id="icons-divs-2">
               <AiOutlineMail id="icons-equipe" />
@@ -125,7 +166,17 @@ function Equipe() {
           <div class="container edit1">
             <h4 id="edit-tx-h4">Verônica Lobo de Santana</h4>
             <p id="edit-tx">
-            Cursando Desenvolvimento de Sistemas no SENAI - Feira de Santana, participante do Hackaton  Orbita em 2023 ficando em 2º lugar.<br/> Com sua formação no ensino médio e seu atual programa de estudos no Senai,<br/> está adquirindo as habilidades técnicas e conhecimentos necessários para se destacar no campo do Desenvolvimento de Sistemas.<br/> Sua natureza proativa e atenciosa complementam essas habilidades, <br/>tornando-a uma estudante dedicada e promissora em sua área de estudo.
+              Cursando Desenvolvimento de Sistemas no SENAI - Feira de Santana,
+              participante do Hackaton Orbita em 2023 ficando em 2º lugar.
+              <br /> Com sua formação no ensino médio e seu atual programa de
+              estudos no Senai,
+              <br /> está adquirindo as habilidades técnicas e conhecimentos
+              necessários para se destacar no campo do Desenvolvimento de
+              Sistemas.
+              <br /> Sua natureza proativa e atenciosa complementam essas
+              habilidades, <br />
+              tornando-a uma estudante dedicada e promissora em
+              sua área de estudo.
             </p>
             <div id="icons-divs">
               <AiOutlineMail id="icons-equipe" />
@@ -139,7 +190,14 @@ function Equipe() {
           <div class="container edit1-v2">
             <h4 id="edit-tx-h4-v2">Victor Wallace Anselmo Santos da Silva</h4>
             <p id="edit-tx-v2">
-            Profissional apaixonado por vendas e desenvolvimento de sistemas. Com anos de experiência<br/> na área comercial, desenvolveu habilidades sólidas em negociação e construção de relacionamentos.  Ao unir seu <br/>conhecimento em tecnologia,é capaz de oferecer soluções personalizadas que impulsionam os negócios dos clientes.<br/> Sua abordagem estratégica e focada em resultados  o torna a pessoa ideal para alavancar as vendase maximizar o crescimento.
+              Profissional apaixonado por vendas e desenvolvimento de sistemas.
+              Com anos de experiência
+              <br /> na área comercial, desenvolveu habilidades sólidas em
+              negociação e construção de relacionamentos. Ao unir seu <br />
+              conhecimento em tecnologia,é capaz de oferecer soluções
+              personalizadas que impulsionam os negócios dos clientes.
+              <br /> Sua abordagem estratégica e focada em resultados o torna a
+              pessoa ideal para alavancar as vendase maximizar o crescimento.
             </p>
             <div id="icons-divs-2">
               <AiOutlineMail id="icons-equipe" />
@@ -159,7 +217,18 @@ function Equipe() {
           <div class="container edit1">
             <h4 id="edit-tx-h4">Vinícius Moreira Silva Santos</h4>
             <p id="edit-tx">
-            Possui uma formação multidisciplinar, que inclui uma graduação em Radiologia, graduação em Matemática (cursando) e curso técnico em Desenvolvimento de Sistemas SENAI-BA (cursando).<br/>Almeja aprimorar constantemente suas habilidades na área de desenvolvimento web, UX/UI design e também no desenvolvimento mobile. Possui uma abordagem abrangente e inovadora ao desenvolvimento de sistemas,<br/> combinando conhecimentos técnicos, habilidades analíticas e de resolução de problemas. Sua busca constante por desafios o impulsiona a aplicar seu conhecimento diversificado e criar soluções tecnológicas eficazes, criativas e impactantes.
+              Possui uma formação multidisciplinar, que inclui uma graduação em
+              Radiologia, graduação em Matemática (cursando) e curso técnico em
+              Desenvolvimento de Sistemas SENAI-BA (cursando).
+              <br />
+              Almeja aprimorar constantemente suas habilidades na área de
+              desenvolvimento web, UX/UI design e também no desenvolvimento
+              mobile. Possui uma abordagem abrangente e inovadora ao
+              desenvolvimento de sistemas,
+              <br /> combinando conhecimentos técnicos, habilidades analíticas e
+              de resolução de problemas. Sua busca constante por desafios o
+              impulsiona a aplicar seu conhecimento diversificado e criar
+              soluções tecnológicas eficazes, criativas e impactantes.
             </p>
             <div id="icons-divs">
               <AiOutlineMail id="icons-equipe" />
@@ -200,11 +269,12 @@ function Equipe() {
           <div class="container edit1">
             <h4 id="edit-tx-h4">João Henrique Neri de Sousa</h4>
             <p id="edit-tx">
-              Estudante de Desenvolvimento de Sistemas no Senai e
-               em paralelo cursando o
-              Superior em Bacharelado <br/>em Sistemas de Informação no IFBA-
-              Instituto Federal da Bahia. Com interesse na área de desenvolvimento <br/>de sistemas,  e acredito que a área de desenvolvimento de softwares é
-              uma área muito interessante e em constante mudança. Sempre muito
+              Estudante de Desenvolvimento de Sistemas no Senai e em paralelo
+              cursando o Superior em Bacharelado <br />
+              em Sistemas de Informação no IFBA- Instituto Federal da Bahia. Com
+              interesse na área de desenvolvimento <br />
+              de sistemas, e acredito que a área de desenvolvimento de softwares
+              é uma área muito interessante e em constante mudança. Sempre muito
               interessado em aprender mais sobre a profissão de desenvolvedor de
               software.
             </p>

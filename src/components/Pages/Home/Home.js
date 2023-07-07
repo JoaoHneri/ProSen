@@ -72,7 +72,9 @@ export const Home = () => {
                     </p>
                   </div>
                 </div>
+                <a href="https://www.tecnicosenai.com.br/unidade-feira-de-santana/" target="blank">
                 <button className="btn-edit-loc">SAIBA MAIS</button>
+                </a>
               </div>
             </div>
           </div>

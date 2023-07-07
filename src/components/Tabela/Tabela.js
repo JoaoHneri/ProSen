@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/Tabela.css";
 import Email from "../../Imagens/email.png";
 import pdf from "../../Imagens/pdf.png";
+import api from "../../services/api";
 
-const Tabela = () => {
+const Tabela = ({ projetoFiltrado }) => {
+  const [Projeto, setProjeto] = useState([]);
+  const [projetoInput, setProjetoInput] = useState("");
+  const [projetoFilter, setProjetoFilter] = useState("");
+  console.log(projetoFiltrado);
+  useEffect(() => {
+    async function getProjeto() {
+      try {
+        const projetos = await api.get("project");
+        const { data } = projetos;
+        setProjeto(data.projects);
+        console.log(projetoFilter);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getProjeto();
+  }, [projetoFiltrado]);
+
+  useEffect(() => {
+    function getSearchProducts() {
+      const filteredProjects = Projeto.filter(
+        (projeto) =>
+          projeto.title.toLowerCase().includes(projetoFiltrado.toLowerCase())
+      );
+      setProjetoFilter(filteredProjects);
+    }
+    getSearchProducts();
+    console.log(projetoFiltrado);
+  }, [Projeto]);
+
   return (
     <div className="table-wrapper">
       <table>
@@ -20,114 +51,75 @@ const Tabela = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Desenvolvimento de Sistemas</td>
-            <td>A IMPORTÂNCIA DO SONO: APLICATIVO CHAMADO MORPHEUS</td>
-            <td>
-              OLIVEIRA, Washington L.J.; GONÇALVES, João V. S.; PEDRO, Lian S.
-              F.; TAMESON , Aberlan.
-            </td>
-            <td>Projeto Inovação</td>
-            <td>PASSOS, Ingrid B. A.</td>
-            <td>22/05/2023</td>
-            <td>
-              <img src={Email} alt="Email" />
-            </td>
-            <td>
-              <img src={pdf} alt="PDF" />
-            </td>
-          </tr>
-          <tr>
-            <td>Administração</td>
-            <td>
-              RECYCLE – PROJETO PARA DESCARTE CORRETO DE MATERIAIS REUTILIZÁVEIS
-            </td>
-            <td>
-              FREITAS, Rafael S.; JUNIOR, Edmilson P. S.; DIAS, Jesimiel A. V.
-              F.; SANTOS, Samuel D. O.
-            </td>
-            <td>Projeto Empresa</td>
-            <td>OLIVEIRA, Mennandro M.</td>
-            <td>22/05/2023</td>
-            <td>
-              <img src={Email} alt="Email" />
-            </td>
-            <td>
-              <img src={pdf} alt="PDF" />
-            </td>
-          </tr>
-          <tr>
-            <td>Desenvolvimento de Sistemas</td>
-            <td>A IMPORTÂNCIA DO SONO: APLICATIVO CHAMADO MORPHEUS</td>
-            <td>
-              OLIVEIRA, Washington L.J.; GONÇALVES, João V. S.; PEDRO, Lian S.
-              F.; TAMESON , Aberlan.
-            </td>
-            <td>Projeto Inovação</td>
-            <td>PASSOS, Ingrid B. A.</td>
-            <td>22/05/2023</td>
-            <td>
-              <img src={Email} alt="Email" />
-            </td>
-            <td>
-              <img src={pdf} alt="PDF" />
-            </td>
-          </tr>
-          <tr>
-            <td>Administração</td>
-            <td>
-              RECYCLE – PROJETO PARA DESCARTE CORRETO DE MATERIAIS REUTILIZÁVEIS
-            </td>
-            <td>
-              FREITAS, Rafael S.; JUNIOR, Edmilson P. S.; DIAS, Jesimiel A. V.
-              F.; SANTOS, Samuel D. O.
-            </td>
-            <td>Projeto Empresa</td>
-            <td>OLIVEIRA, Mennandro M.</td>
-            <td>22/05/2023</td>
-            <td>
-              <img src={Email} alt="Email" />
-            </td>
-            <td>
-              <img src={pdf} alt="PDF" />
-            </td>
-          </tr>
-          <tr>
-            <td>Desenvolvimento de Sistemas</td>
-            <td>A IMPORTÂNCIA DO SONO: APLICATIVO CHAMADO MORPHEUS</td>
-            <td>
-              OLIVEIRA, Washington L.J.; GONÇALVES, João V. S.; PEDRO, Lian S.
-              F.; TAMESON , Aberlan.
-            </td>
-            <td>Projeto Inovação</td>
-            <td>PASSOS, Ingrid B. A.</td>
-            <td>22/05/2023</td>
-            <td>
-              <img src={Email} alt="Email" />
-            </td>
-            <td>
-              <img src={pdf} alt="PDF" />
-            </td>
-          </tr>
-          <tr>
-            <td>Administração</td>
-            <td>
-              RECYCLE – PROJETO PARA DESCARTE CORRETO DE MATERIAIS REUTILIZÁVEIS
-            </td>
-            <td>
-              FREITAS, Rafael S.; JUNIOR, Edmilson P. S.; DIAS, Jesimiel A. V.
-              F.; SANTOS, Samuel D. O.
-            </td>
-            <td>Projeto Empresa</td>
-            <td>OLIVEIRA, Mennandro M.</td>
-            <td>22/05/2023</td>
-            <td>
-              <img src={Email} alt="Email" />
-            </td>
-            <td>
-              <img src={pdf} alt="PDF" />
-            </td>
-          </tr>
+          {projetoFilter.length < 0 ? (
+            Projeto ? (
+              Projeto.map((projeto) => (
+                <tr>
+                  <td>{projeto.area}</td>
+                  <td>{projeto.title}</td>
+                  <td>{projeto.authors}</td>
+                  <td>{projeto.type}</td>
+                  <td>{projeto.supervisor}</td>
+                  <td>{projeto.date}</td>
+                  <td>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={`https://mail.google.com/mail/?view=cm&to=${projeto.groupLeaderEmail}`}
+                    >
+                      <img src={Email} alt="Email" />
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={`${process.env.REACT_APP_API}/temp/uploads/${projeto.src.key}`}
+                    >
+                      <img src={pdf} alt="PDF" />
+                    </a>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={8}>Carregando...</td>
+              </tr>
+            )
+          ) : projetoFilter ? (
+            projetoFilter.map((projeto) => (
+              <tr>
+                <td>{projeto.area}</td>
+                <td>{projeto.title}</td>
+                <td>{projeto.authors}</td>
+                <td>{projeto.type}</td>
+                <td>{projeto.supervisor}</td>
+                <td>{projeto.date}</td>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={`https://mail.google.com/mail/?view=cm&to=${projeto.groupLeaderEmail}`}
+                  >
+                    <img src={Email} alt="Email" />
+                  </a>
+                </td>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={`${process.env.REACT_APP_API}/temp/uploads/${projeto.src.key}`}
+                  >
+                    <img src={pdf} alt="PDF" />
+                  </a>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={8}>Carregando...</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

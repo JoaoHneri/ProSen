@@ -36,13 +36,12 @@ function NavBar() {
             <Nav.Link id="link-nav" href="/#Eventos">
               Eventos
             </Nav.Link>
-            <Nav.Link id="link-nav" href="/#Repositorio">
+            <Nav.Link id="link-nav" href="/login">
               Repositório
             </Nav.Link>
             <Nav.Link
               id="link-nav"
-              target="blank"
-              href="https://www.tecnicosenai.com.br/unidade-feira-de-santana/"
+              href="/equipe"
             >
               Contato
             </Nav.Link>

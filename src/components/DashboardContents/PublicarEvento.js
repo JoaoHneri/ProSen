@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { UserContext } from "../useContext/UserContext";
 import Upload from '../../Imagens/Upload.png'
 import AddImageEvent from '../../Imagens/AddImageEvent.png'
+import { useNavigate } from "react-router-dom";
 
 const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);
@@ -22,6 +23,7 @@ const PublicarEvento = () => {
   const [descricao, setDescricao] = useState("");
   const [file, setFile] = useState(null);
   const inputFileRef = useRef(null);
+  const navigate = useNavigate();
 
   // console.log(title)
   // console.log(startDate)
@@ -77,12 +79,14 @@ const PublicarEvento = () => {
       data.append("file", file);
   
       const response = await api.post(url, data);
-  
+      alert('Sucesso, Evento Publicado!')
+      navigate('/eventos')
       console.log(response.data); // Mensagem de sucesso e dados do evento
   
       // Faça algo com a resposta, como redirecionar para outra página
     } catch (error) {
       console.error(error);
+      alert('Publicação do Evento falhou, verifique se todos os campos estão preenchidos corretamente')
       // Trate o erro aqui
     }
   };

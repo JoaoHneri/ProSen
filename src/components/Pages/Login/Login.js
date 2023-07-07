@@ -73,7 +73,7 @@ function Login() {
               </div>
               <div class="inputbox">
                 <input
-                  type="text"
+                  type="password"
                   placeholder="Senha"
                   required="required"
                   onChange={(e) => setPassword(e.target.value)}

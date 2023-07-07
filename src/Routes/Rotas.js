@@ -37,7 +37,11 @@ const Rotas = () => {
         <Route exact path="/repositorios" Component={Respositorios} />
         <Route exact path="/equipe" Component={Equipe} />
         <Route exact path="/login" Component={Login}/>
-        <Route exact path="/Dashboard" Component={Dashboard}/>
+
+        <Route
+          path="/Dashboard"
+          element={userData.logado ? <Dashboard/> : <Login/>}
+        />
       </Routes>
     </Router>
   );

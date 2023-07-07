@@ -16,7 +16,7 @@ function NavBar() {
   return (
     <Navbar expand="lg" className="nav-edit">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand >
           <Link to={"/"}>
             <img src={logo} alt="Logo" id="logo-nav" />
           </Link>
@@ -24,7 +24,7 @@ function NavBar() {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="ml-auto">
-            <Nav.Link id="link-nav" href="/#Eventos">
+            <Nav.Link id="link-nav" href="/eventos">
               Eventos
             </Nav.Link>
             <Nav.Link id="link-nav" href="/repositorios">

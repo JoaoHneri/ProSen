@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "../useContext/UserContext";
 import {FaUpload} from 'react-icons/fa'
 import Upload from '../../Imagens/Upload.png';
+import { useNavigate } from "react-router-dom";
 
 const PublicarProjeto = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -24,6 +25,7 @@ const PublicarProjeto = () => {
   const inputFileRef = useRef(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [Evento, setEvento] = useState([]);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +49,7 @@ const PublicarProjeto = () => {
       data.append("file", file);
       const response = await api.post(url, data);
       alert("Projeto Postado com Sucesso!");
+      navigate('/repositorios');
       console.log(response.data); // Mensagem de sucesso e dados do evento
 
       // Faça algo com a resposta, como redirecionar para outra página

@@ -11,12 +11,14 @@ import EditarProjeto from "../../DashboardContents/EditarProjeto";
 import EditarEvento from "../../DashboardContents/EditarEvento";
 import Historico from "../../DashboardContents/Historico";
 import { FiX, FiXCircle } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 import { IconContext } from "react-icons";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("perfil");
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate(true);
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -38,6 +40,17 @@ const Dashboard = () => {
         return null;
     }
   };
+
+  async function logoutHandler(e) {
+    localStorage.setItem("email_Prosen", "");
+    localStorage.setItem("name_Prosen", "");
+    localStorage.setItem("id_Prosen", "");
+    localStorage.removeItem("logado_Prosen");
+    await navigate("/");
+    window.location.reload(true);
+    e.preventDefault();
+  }
+
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -74,7 +87,7 @@ const Dashboard = () => {
           <button className="nav-button" onClick={() => setActiveComponent("historico")}>
             Histórico
           </button>
-          <button className="nav-button-exit">
+          <button className="nav-button-exit" onClick={logoutHandler}>
             Sair Da Conta <BiExit id="icon-exit" />
           </button>
         </div>

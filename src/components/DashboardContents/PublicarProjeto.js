@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
-import imgForm from "../../Imagens/imageForm.png"
+import React, { useState, useRef, useEffect } from "react";
+import imgForm from "../../Imagens/imageForm.png";
 import "../Styles/StyleContents/PublicarProjeto.css";
 import api from "../../services/api";
 import { useContext } from "react";
 import { UserContext } from "../useContext/UserContext";
+import {FaUpload} from 'react-icons/fa'
+import Upload from '../../Imagens/Upload.png'
 
-import Select from 'react-select';
-
+import Select from "react-select";
 
 
 const PublicarProjeto = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [userData, setUserData] = useContext(UserContext);
-  const [title, setTitle] = useState('');
-  const [area, setArea] = useState('');
-  const [shift, setShift] = useState('');
-  const [type, setType] = useState('');
-  const [date, setDate] = useState('');
-  const [linkEvent, setLinkEvent] = useState('');
-  const [supervisor, setSupervisor] = useState('');
-  const [groupLeaderEmail, setGroupLeaderEmail] = useState('');
-  const [classProject, setClassproject] = useState('');
-  const [authors, setAuthors] = useState('');
+  const [title, setTitle] = useState("");
+  const [area, setArea] = useState("");
+  const [shift, setShift] = useState("");
+  const [type, setType] = useState("");
+  const [date, setDate] = useState("");
+  const [linkEvent, setLinkEvent] = useState("");
+  const [supervisor, setSupervisor] = useState("");
+  const [groupLeaderEmail, setGroupLeaderEmail] = useState("");
+  const [classProject, setClassproject] = useState("");
+  const [authors, setAuthors] = useState("");
   const [file, setFile] = useState(null);
-
-
-  const formatDate = (date) => {
-    return date.replace(/\D/g, "");
-  };
-
-  const formatTime = (time) => {
-    return time.replace(/\D/g, "");
-  };
+  const inputFileRef = useRef(null);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [Evento, setEvento] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,20 +46,41 @@ const PublicarProjeto = () => {
       data.append("classProject", classProject);
       data.append("authors", authors);
       data.append("file", file);
-     ;
-
       const response = await api.post(url, data);
-      alert("foi")
+      alert("Projeto Postado com Sucesso!");
       console.log(response.data); // Mensagem de sucesso e dados do evento
 
       // Faça algo com a resposta, como redirecionar para outra página
     } catch (error) {
       console.error(error);
-      alert(error.message);
+      alert("Desculpe o Projeto não foi postado, verifique todos os campos");
       // Trate o erro aqui
     }
   };
 
+  const handleFileDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    setFile(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+  useEffect(() => {
+    async function getEvents(){
+      try {
+        const events = await api.get('/event');
+        const {data} = events;
+        setEvento(data.events);
+  
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getEvents();
+  },[api])
+ 
   return (
     <>
       <div>
@@ -81,9 +97,10 @@ const PublicarProjeto = () => {
                     type="text"
                     name="title"
                     className="input"
-          
                     value={title}
-                    onChange={(e)=>{setTitle(e.target.value)}}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
                   />
                 </div>
                 <div>
@@ -92,9 +109,10 @@ const PublicarProjeto = () => {
                     type="text"
                     name="area"
                     className="input"
-          
                     value={area}
-                    onChange={(e)=>{setArea(e.target.value)}}
+                    onChange={(e) => {
+                      setArea(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="itens-form">
@@ -103,20 +121,24 @@ const PublicarProjeto = () => {
                     type="text"
                     name="classProject"
                     className="input"
-    
                     value={classProject}
-                    onChange={(e)=>{setClassproject(e.target.value)}}
+                    onChange={(e) => {
+                      setClassproject(e.target.value);
+                    }}
                   />
                   <label className="edit-label">Turno:</label>
                   <select
                     name="shift"
                     className="input"
                     value={shift}
-                    onChange={(e)=>{setShift(e.target.value)}}
+                    onChange={(e) => {
+                      setShift(e.target.value);
+                    }}
                   >
-                    <option value="valor1">Valor 1</option>
-                    <option value="valor2">Valor 2</option>
-                    <option value="valor3">Valor 3</option>
+                    <option value=""></option>
+                    <option value="Matutino">Matutino</option>
+                    <option value="Verpertino">Verpertino</option>
+                    <option value="Noturno">Noturno</option>
                   </select>
                 </div>
                 <div className="itens-form">
@@ -125,21 +147,32 @@ const PublicarProjeto = () => {
                     name="type"
                     className="input"
                     value={type}
-                    onChange={(e)=>{setType(e.target.value)}}
+                    onChange={(e) => {
+                      setType(e.target.value);
+                    }}
                   >
-                    <option value="valor1">Valor 1</option>
-                    <option value="valor2">Valor 2</option>
-                    <option value="valor3">Valor 3</option>
+                    <option value=""></option>
+                    <option value="Amostra Científica">Amostra Científica</option>
+                    <option value="TCC">TCC</option>
                   </select>
                   <label className="edit-label">Data:</label>
+                  <input
+                    type="date"
+                    name="startDate"
+                    className="input"
+                    value={date}
+                    onChange={(e)=>{setDate(e.target.value)}}
+                  />
+                  {/* <label className="edit-label">Data:</label>
                   <input
                     type="time"
                     name="date"
                     className="input"
-         
                     value={date}
-                    onChange={(e)=>{setDate(e.target.value)}}
-                  />
+                    onChange={(e) => {
+                      setDate(e.target.value);
+                    }}
+                  /> */}
                 </div>
                 <div className="itens-form">
                   <label className="edit-label">Vincular ao Evento</label>
@@ -147,11 +180,18 @@ const PublicarProjeto = () => {
                     name="linkEvent"
                     className="input"
                     value={linkEvent}
-                    onChange={(e)=>{setLinkEvent(e.target.value)}}
+                    onChange={(e) => {
+                      setLinkEvent(e.target.value);
+                    }}
                   >
-                    <option value="valor1">Valor 1</option>
-                    <option value="valor2">Valor 2</option>
-                    <option value="valor3">Valor 3</option>
+                    <option value=""></option>
+                    {Evento.length > 0 ?
+                    Evento.map((events)=>(
+                      <option value={events.id}>{events.title}</option>
+                      
+                      )  )
+                      : <option value='Sem Eventos Postados no momento'>Ainda não Existe Eventos Postados</option>
+                  }
                   </select>
                 </div>
                 <div className="itens-form">
@@ -160,9 +200,10 @@ const PublicarProjeto = () => {
                     type="text"
                     name="supervisor"
                     className="input"
-             
                     value={supervisor}
-                    onChange={(e)=>{setSupervisor(e.target.value)}}
+                    onChange={(e) => {
+                      setSupervisor(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="itens-form">
@@ -171,9 +212,10 @@ const PublicarProjeto = () => {
                     type="text"
                     name="groupLeaderEmail"
                     className="input"
-                 
                     value={groupLeaderEmail}
-                    onChange={(e)=>{setGroupLeaderEmail(e.target.value)}}
+                    onChange={(e) => {
+                      setGroupLeaderEmail(e.target.value);
+                    }}
                   />
                 </div>
                 <div>
@@ -182,7 +224,9 @@ const PublicarProjeto = () => {
                     name="authors"
                     className="input"
                     value={authors}
-                    onChange={(e)=>{setAuthors(e.target.value)}}
+                    onChange={(e) => {
+                      setAuthors(e.target.value);
+                    }}
                   >
                     <option value="aluno1">aluno1</option>
                     <option value="aluno2">aluno2</option>
@@ -191,8 +235,38 @@ const PublicarProjeto = () => {
                 </div>
               </div>
               <div className="img-form-input">
-                <p>Anexar Arquivos do Projeto em (PDF)</p>
-                <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
+                <div
+                  onDrop={handleFileDrop}
+                  onDragOver={handleDragOver}
+                >
+                  {file ? (
+                    <div>
+                      <span>Arquivo selecionado:</span>
+                      <br />
+                      <span>{file.name}</span>
+                    </div>
+                  ) : (
+                    <label htmlFor="fileInput" className="fileInputContainer">
+                      <span className="labelText">
+                        <div><img id="UpIcon" src={Upload} alt="Arraste o arquivo"/></div>
+                        <p id="arrest">Arraste e solte o arquivo aqui</p>
+                        <p id="or">ou <span id="sele">selecione o arquivo</span></p>
+                      </span>
+                      
+                      <input
+                        ref={inputFileRef}
+                        id="fileInput"
+                        type="file"
+                        style={{ display: "none" }}
+                        name="file"
+                        onChange={(e) => {
+                          setFile(e.target.files[0]);
+                        }}
+                      />
+                      
+                    </label>
+                  )}
+                </div>
               </div>
             </div>
             <div className="upArq">
@@ -206,6 +280,3 @@ const PublicarProjeto = () => {
 };
 
 export default PublicarProjeto;
-
-
-

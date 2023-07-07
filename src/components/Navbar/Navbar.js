@@ -12,16 +12,7 @@ function NavBar() {
   const [userData, setUserData] = useContext(UserContext);
   const navigate = useNavigate();
 
-  async function logoutHandler(e) {
-    localStorage.setItem("email_Prosen", "");
-    localStorage.setItem("name_Prosen", "");
-    localStorage.setItem("id_Prosen", "");
-    localStorage.removeItem("logado_Prosen");
-    await navigate("/");
-    window.location.reload(true);
-    e.preventDefault();
-  }
-
+  
   return (
     <Navbar expand="lg" className="nav-edit">
       <Container>
@@ -36,7 +27,7 @@ function NavBar() {
             <Nav.Link id="link-nav" href="/#Eventos">
               Eventos
             </Nav.Link>
-            <Nav.Link id="link-nav" href="/login">
+            <Nav.Link id="link-nav" href="/repositorios">
               Repositório
             </Nav.Link>
             <Nav.Link
@@ -62,7 +53,6 @@ function NavBar() {
               
 
               <FaUserAlt id="icon-nav" />
-              <button onClick={logoutHandler}>sair</button>
             </div>
           </Nav>
         </Navbar.Collapse>

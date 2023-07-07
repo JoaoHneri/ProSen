@@ -111,8 +111,8 @@ const EventoById = () => {
           <div>
             <img className="imageToPost" src={Event ? `${process.env.REACT_APP_API}/temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
           </div>
-          {/* <div>
-            <img src={Evento2} alt="Foto do evento" />
+          <div>
+            <img src={Foto1} alt="Foto do evento" />
           </div>
           <div>
             <img src={Evento3} alt="Foto do evento" />
@@ -131,7 +131,7 @@ const EventoById = () => {
           </div>
           <div>
             <img src={evento8} alt="Foto do evento" />
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="tx-cont container Section_Prosen">

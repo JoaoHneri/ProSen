@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, useLocation, Navigate} from "react-router-dom";
 import { Home } from "../components/Pages/Home/Home";
 import Eventos from "../components/Pages/Eventos/Eventos";
 import EventoById from "../components/Pages/EventoByID/EventoById";
@@ -22,6 +22,7 @@ function ToTop() {
 
 const Rotas = () => {
   const [userData, setUserData] = useContext(UserContext);
+  console.log(userData.logado);
   return (
     <Router>
       <ToTop />
@@ -29,6 +30,10 @@ const Rotas = () => {
         <Route exact path="/" Component={Home} />
         <Route exact path="/eventos" Component={Eventos} />
         <Route exact path="/eventos/:id" Component={EventoById} />
+        <Route
+          path="/repositorios"
+          element={userData.logado ? <Respositorios/> : <Login/>}
+        />
         <Route exact path="/repositorios" Component={Respositorios} />
         <Route exact path="/equipe" Component={Equipe} />
         <Route exact path="/login" Component={Login}/>

@@ -12,21 +12,18 @@ import Select from 'react-select';
 const PublicarProjeto = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [userData, setUserData] = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    user_id: userData.id,
-    title: "",
-    area: "",
-    classProject: "",
-    shift: "",
-    type: "",
-    date: "",
-    linkEvent: "",
-    supervisor: "",
-    groupLeaderEmail: "",
-    authors: "",
-    src: null,
-    
-  });
+  const [title, setTitle] = useState('');
+  const [area, setArea] = useState('');
+  const [shift, setShift] = useState('');
+  const [type, setType] = useState('');
+  const [date, setDate] = useState('');
+  const [linkEvent, setLinkEvent] = useState('');
+  const [supervisor, setSupervisor] = useState('');
+  const [groupLeaderEmail, setGroupLeaderEmail] = useState('');
+  const [classProject, setClassproject] = useState('');
+  const [authors, setAuthors] = useState('');
+  const [file, setFile] = useState(null);
+
 
   const formatDate = (date) => {
     return date.replace(/\D/g, "");
@@ -43,17 +40,17 @@ const PublicarProjeto = () => {
       const url = "/project";
       const data = new FormData();
       data.append("user_id", userData.id);
-      data.append("title", formData.title);
-      data.append("area", formData.area);
-      data.append("shift", formData.shift);
-      data.append("type", formData.type);
-      data.append("date", formData.date);
-      data.append("linkEvent", formData.linkEvent);
-      data.append("supervisor", formData.supervisor);
-      data.append("groupLeaderEmail", formData.groupLeaderEmail);
-      data.append("classProject", formData.classProject);
-      data.append("authors", formData.authors);
-      data.append("src", formData.src);
+      data.append("title", title);
+      data.append("area", area);
+      data.append("shift", shift);
+      data.append("type", type);
+      data.append("date", date);
+      data.append("linkEvent", linkEvent);
+      data.append("supervisor", supervisor);
+      data.append("groupLeaderEmail", groupLeaderEmail);
+      data.append("classProject", classProject);
+      data.append("authors", authors);
+      data.append("file", file);
      ;
 
       const response = await api.post(url, data);
@@ -66,17 +63,6 @@ const PublicarProjeto = () => {
       alert(error.message);
       // Trate o erro aqui
     }
-  };
-
-  const handleChangesele = (selected) => {
-    setSelectedOptions(selected);
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
   };
 
   return (
@@ -96,8 +82,8 @@ const PublicarProjeto = () => {
                     name="title"
                     className="input"
           
-                    value={formData.title}
-                    onChange={handleChange}
+                    value={title}
+                    onChange={(e)=>{setTitle(e.target.value)}}
                   />
                 </div>
                 <div>
@@ -107,8 +93,8 @@ const PublicarProjeto = () => {
                     name="area"
                     className="input"
           
-                    value={formData.area}
-                    onChange={handleChange}
+                    value={area}
+                    onChange={(e)=>{setArea(e.target.value)}}
                   />
                 </div>
                 <div className="itens-form">
@@ -118,15 +104,15 @@ const PublicarProjeto = () => {
                     name="classProject"
                     className="input"
     
-                    value={formData.classProject}
-                    onChange={handleChange}
+                    value={classProject}
+                    onChange={(e)=>{setClassproject(e.target.value)}}
                   />
                   <label className="edit-label">Turno:</label>
                   <select
                     name="shift"
                     className="input"
-                    value={formData.shift}
-                    onChange={handleChange}
+                    value={shift}
+                    onChange={(e)=>{setShift(e.target.value)}}
                   >
                     <option value="valor1">Valor 1</option>
                     <option value="valor2">Valor 2</option>
@@ -138,8 +124,8 @@ const PublicarProjeto = () => {
                   <select
                     name="type"
                     className="input"
-                    value={formData.type}
-                    onChange={handleChange}
+                    value={type}
+                    onChange={(e)=>{setType(e.target.value)}}
                   >
                     <option value="valor1">Valor 1</option>
                     <option value="valor2">Valor 2</option>
@@ -151,8 +137,8 @@ const PublicarProjeto = () => {
                     name="date"
                     className="input"
          
-                    value={formData.date}
-                    onChange={handleChange}
+                    value={date}
+                    onChange={(e)=>{setDate(e.target.value)}}
                   />
                 </div>
                 <div className="itens-form">
@@ -160,8 +146,8 @@ const PublicarProjeto = () => {
                   <select
                     name="linkEvent"
                     className="input"
-                    value={formData.linkEvent}
-                    onChange={handleChange}
+                    value={linkEvent}
+                    onChange={(e)=>{setLinkEvent(e.target.value)}}
                   >
                     <option value="valor1">Valor 1</option>
                     <option value="valor2">Valor 2</option>
@@ -175,8 +161,8 @@ const PublicarProjeto = () => {
                     name="supervisor"
                     className="input"
              
-                    value={formData.supervisor}
-                    onChange={handleChange}
+                    value={supervisor}
+                    onChange={(e)=>{setSupervisor(e.target.value)}}
                   />
                 </div>
                 <div className="itens-form">
@@ -186,8 +172,8 @@ const PublicarProjeto = () => {
                     name="groupLeaderEmail"
                     className="input"
                  
-                    value={formData.groupLeaderEmail}
-                    onChange={handleChange}
+                    value={groupLeaderEmail}
+                    onChange={(e)=>{setGroupLeaderEmail(e.target.value)}}
                   />
                 </div>
                 <div>
@@ -195,8 +181,8 @@ const PublicarProjeto = () => {
                   <select
                     name="authors"
                     className="input"
-                    value={formData.authors}
-                    onChange={handleChange}
+                    value={authors}
+                    onChange={(e)=>{setAuthors(e.target.value)}}
                   >
                     <option value="aluno1">aluno1</option>
                     <option value="aluno2">aluno2</option>
@@ -206,8 +192,7 @@ const PublicarProjeto = () => {
               </div>
               <div className="img-form-input">
                 <p>Anexar Arquivos do Projeto em (PDF)</p>
-                <input type="file" name='src'  value={formData.src}
-                    onChange={handleChange}/>
+                <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} />
               </div>
             </div>
             <div className="upArq">
@@ -221,3 +206,6 @@ const PublicarProjeto = () => {
 };
 
 export default PublicarProjeto;
+
+
+

@@ -1,6 +1,10 @@
 .informs{
     display: flex;
 }
+.imageToPost{
+    width: 300px;
+    height: 300px;
+}
 .paragrafs{
     max-width: 750px;
     margin-left: 25px;

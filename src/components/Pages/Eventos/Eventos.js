@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Navbar/Navbar";
 import Banner3 from "../../Section-Banner/Banner3";
 import Search from "../../../Imagens/search.png";
@@ -7,23 +7,24 @@ import Dropdown from "react-bootstrap/Dropdown";
 import CardEvent from "../../CardEvent/CardEvent";
 import Footer from "../../Footer/Footer";
 import api from "../../../services/api";
+import { all } from "axios";
 
 const Eventos = () => {
+  const [allEvents, setAllEvents] = useState([]);
 
-
-  async function getEvents() {
-    try {
-      const userData = await api.get("event", {
-      });
-      const userInfo = userData.data;
-      console.log(userInfo);
-    } catch (err) {
-      console.log(err);
-    }
-  }
   useEffect(() => {
-    getEvents();
-  },[])
+    async function getAllEvents(){
+      try {
+        const events = await api.get('/event');
+        const {data} = events;
+        setAllEvents(data.events);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getAllEvents();
+  },[api]);
+
 
   return (
     <div>
@@ -60,16 +61,9 @@ const Eventos = () => {
             </div>
           </div>
           <div className="container-fluid edit-cont-cards">
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-      </div>
-      <div className="container-fluid edit-cont-cards">
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
+            {allEvents.map((events)=>(
+            <div className="divEvent"><CardEvent id={events._id} title={events.title} local={events.local} startDate={events.startDate}/></div>
+          ) )}
       </div>
         </div>
       </div>

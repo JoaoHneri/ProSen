@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Navbar/Navbar";
 import Banner4 from "../../Section-Banner/Banner4";
 import "../../Styles/EventoByID.css";
-import Date from "../../../Imagens/date.png";
+import DateIcon from "../../../Imagens/date.png";
 import Time from "../../../Imagens/time.png";
 import Location from "../../../Imagens/location.png";
 import baseUser from "../../../Imagens/baseUser.png";
@@ -25,64 +25,69 @@ import Evento7 from "../../../Imagens/evento7.png"
 import evento8 from "../../../Imagens/evento8.png"
 import video2 from "../../../Imagens/video2.png"
 import video3 from "../../../Imagens/video3.png"
+import { useParams } from "react-router-dom";
+import api from "../../../services/api";
 
 
 
 
 
 const EventoById = () => {
+  const [Event, setEvent] = useState();
+  const {id} = useParams();
+
+  useEffect(()=>{
+    async function getEventById(){
+      try {
+        const event = await api.get(`/event/${id}`);
+        const {data} = event;
+        setEvent(data);
+        console.log(event)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getEventById()
+  },[id]);
+
+  function formatarDataBrasileira(data) {
+    const dateObj = new Date(data);
+
+    const dia = String(dateObj.getDate()).padStart(2, "0");
+    const mes = String(dateObj.getMonth() + 1).padStart(2, "0"); // Os meses são indexados a partir de 0, então é necessário adicionar +1
+    const ano = dateObj.getFullYear();
+
+    return `${dia}/${mes}/${ano}`;
+  }
+  
+  
   return (
     <div>
       <NavBar />
       <Banner4 />
       <div className="content-container"></div>
       <div className="tx-cont container Section_Prosen">
-        <h1>Mostra de Projeto & Pesquisa Científica 2023.1</h1>
+        <h1>{Event ? Event.title : 'Carregando' }</h1>
       </div>
       <div className="container informs">
         <div className="paragrafs">
           <p>
-            No semestre 2023.1, o SENAI Feira de Santana promoveu a "Mostra de
-            Projeto & Pesquisa Científica" com foco nas áreas de Gestão e
-            Tecnologia da Informação (TI). O evento reuniu estudantes,
-            professores e profissionais dessas áreas, proporcionando um espaço
-            para o intercâmbio de conhecimento e a apresentação de projetos
-            inovadores.
-            <br />
-            <br />
-            Durante a mostra, os participantes tiveram a oportunidade de
-            compartilhar suas descobertas e soluções para desafios enfrentados
-            na área de Gestão e TI. Os projetos e pesquisas abordaram temas como
-            inteligência artificial, análise de dados, gestão de processos e
-            segurança da informação. A exposição de projetos e a sessão de
-            pôsteres foram momentos-chave do evento, permitindo aos estudantes
-            demonstrar sua criatividade e habilidade prática na aplicação de
-            conceitos teóricos.
-            <br />
-            <br />
-            Além disso, a mostra contou com a presença de representantes de
-            empresas locais, interessados em identificar talentos e estabelecer
-            parcerias. Esse contato direto entre os estudantes e o setor
-            empresarial contribuiu para a formação de networking e possíveis
-            oportunidades profissionais. A "Mostra de Projeto & Pesquisa
-            Científica: Gestão e TI" foi um evento de sucesso, consolidando-se
-            como um espaço para o compartilhamento de conhecimento, incentivo à
-            pesquisa e promoção dos avanços nessas áreas de estudo.
+            {Event ? Event.descricao : 'Carregando' }
           </p>
         </div>
         <div className="details">
           <p>
-            <img src={Date} alt="Data do Evento" className="m-1" />
-            25/05/2023
+            <img src={DateIcon} alt="Data do Evento" className="m-1" />
+            {Event ? formatarDataBrasileira(Event.startDate) : 'Carregando' }
           </p>
 
           <p>
             <img className="m-1" src={Time} alt="Horário do Evento" />
-            8h às 21h
+            {Event ? Event.hour : 'Carregando' }
           </p>
           <p>
             <img className="m-1" src={Location} alt="Localização do Evento" />
-            SENAI - Feira de Santana
+            {Event ? Event.local : 'Carregando' }
           </p>
           <p className="eventTypes m-1">
             <div className="userEvent">
@@ -90,7 +95,7 @@ const EventoById = () => {
               <img className="user" src={User} alt="Tipo de Evento" />
               <img src={baseUser} alt="Tipo de Evento" />
             </div>
-            Evento Presencial
+            {Event ? Event.type : 'Carregando' }
           </p>
         </div>
       </div>
@@ -103,9 +108,9 @@ const EventoById = () => {
         </div>
         <div className="divFotos">
           <div>
-            <img src={Foto1} alt="Foto do evento" />
+            <img className="imageToPost" src={Event ? `http://localhost:3333/temp/uploads/${Event.src.key}` : 'carregando'} alt="Foto do evento" />
           </div>
-          <div>
+          {/* <div>
             <img src={Evento2} alt="Foto do evento" />
           </div>
           <div>
@@ -125,7 +130,7 @@ const EventoById = () => {
           </div>
           <div>
             <img src={evento8} alt="Foto do evento" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="tx-cont container Section_Prosen">

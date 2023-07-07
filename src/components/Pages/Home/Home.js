@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Navbar/Navbar";
 import SectionBanner1 from "../../Section-Banner/Banner";
 import prosen from "../../../Imagens/prosen.png";
@@ -12,8 +12,27 @@ import CardEvent from "../../CardEvent/CardEvent";
 import Devs from '../../../Imagens/devs.png';
 import Footer from "../../Footer/Footer";
 import { Link } from "react-router-dom";
+import api from "../../../services/api";
 
 export const Home = () => {
+  const [eventos, setEventos] = useState([]);
+
+  useEffect(()=>{
+    async function getEvents(){
+      try {
+        const events = await api.get('/event');
+        const {data} = events;
+        const newEvents = data.events.slice(0,4);
+        setEventos(newEvents);
+        console.log(eventos);
+  
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getEvents();
+  },[api])
+  
   return (
     <div>
       <NavBar />
@@ -115,10 +134,13 @@ export const Home = () => {
         </div>
       </div>
       <div className="container-fluid edit-cont-cards">
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
-        <div className="divEvent"><CardEvent /></div>
+        {
+          eventos.map((events)=>(
+            <div className="divEvent"><CardEvent id={events._id} title={events.title} local={events.local} startDate={events.startDate}/></div>
+          ) )
+        }
+        
+
       </div>
 
       <div className="seeButton">

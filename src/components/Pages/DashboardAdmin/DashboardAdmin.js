@@ -4,12 +4,12 @@ import { BiExit, BiMenu } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import "../../Styles/Dashboard.css";
-import Profile from "../../DashboardContents/Profile";
-import PublicarEvento from "../../DashboardContents/PublicarEvento";
-import PublicarProjeto from "../../DashboardContents/PublicarProjeto";
-import EditarProjeto from "../../DashboardContents/EditarProjeto";
-import EditarEvento from "../../DashboardContents/EditarEvento";
-import Historico from "../../DashboardContents/Historico";
+import Profile from "../../DashboardContentsAdmin/Profile";
+import PublicarEvento from "../../DashboardContentsAdmin/PublicarEvento";
+import CadastrarProfessor from"../../DashboardContentsAdmin/CadastrarProfessor"
+import EditarProfessor from"../../DashboardContentsAdmin/EditarProfessor"
+import EditarEvento from "../../DashboardContentsAdmin/EditarEvento";
+
 import { FiX, FiXCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
@@ -24,18 +24,17 @@ const Dashboard = () => {
     switch (activeComponent) {
       case "perfil":
         return <Profile />;
-      case "publicar-projeto":
-        return <PublicarProjeto />;
+    
       case "publicar-evento":
         return <PublicarEvento />;
-      case "editar-projeto":
-        return <EditarProjeto />;
+ 
+        case "cadastrar-professor":
+          return <CadastrarProfessor/>;
+          case "editar-professor":
+            return <EditarProfessor/>;
       case "editar-evento":
         return <EditarEvento />;
-      case "historico":
-        return <Historico />;
-        case "historico":
-        return <Historico />;
+    
       default:
         return null;
     }
@@ -72,21 +71,18 @@ const Dashboard = () => {
           <button className="nav-button" onClick={() => setActiveComponent("perfil")}>
             Perfil
           </button>
-          <button className="nav-button" onClick={() => setActiveComponent("publicar-projeto")}>
-            Publicar Projeto
-          </button>
+       
           <button className="nav-button" onClick={() => setActiveComponent("publicar-evento")}>
             Publicar Evento
           </button>
-          <button className="nav-button" onClick={() => setActiveComponent("editar-projeto")}>
-            Editar Projeto
+          <button className="nav-button" onClick={() => setActiveComponent("editar-professor")}>
+            Editar Professor
           </button>
+       
           <button className="nav-button" onClick={() => setActiveComponent("editar-evento")}>
             Editar Evento
           </button>
-          <button className="nav-button" onClick={() => setActiveComponent("historico")}>
-            Histórico
-          </button>
+      
           <button className="nav-button-exit" onClick={logoutHandler}>
             Sair Da Conta <BiExit id="icon-exit" />
           </button>

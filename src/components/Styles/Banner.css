@@ -34,7 +34,11 @@
   height: 100%;
   z-index: 1;
 }
+#circle-edit{
+  color: #F7971D;
+  font-size: 12pt;
 
+}
 .hero-section .hero-content h1 {
   font-size: 5.5rem;
   color: white;
@@ -46,6 +50,11 @@
 @media (max-width: 768px) {
   .hero-section .hero-content h1 {
     font-size: 3.5rem;
+  }
+  #circle-edit{
+    color: #F7971D;
+    font-size: 12pt;
+  
   }
 }
 

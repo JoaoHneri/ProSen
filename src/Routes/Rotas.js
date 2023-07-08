@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {BrowserRouter as Router, Routes, Route, useLocation} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, useLocation, Navigate} from "react-router-dom";
 import { Home } from "../components/Pages/Home/Home";
 import Eventos from "../components/Pages/Eventos/Eventos";
 import EventoById from "../components/Pages/EventoByID/EventoById";
@@ -9,6 +9,7 @@ import Login from "../components/Pages/Login/Login";
 import PublicarProjeto from "../components/Pages/publicarProjeto/PublicarProjeto";
 import PublicarEvento from "../components/Pages/PublicarEvento/PublicarEvento";
 import Dashboard from "../components/Pages/Dashboard/Dashboard"
+import DashboardAdmin from "../components/Pages/DashboardAdmin/DashboardAdmin"
 import { useContext } from "react";
 import { UserContext } from "../components/useContext/UserContext";
 
@@ -22,6 +23,7 @@ function ToTop() {
 
 const Rotas = () => {
   const [userData, setUserData] = useContext(UserContext);
+  console.log(userData.logado);
   return (
     <Router>
       <ToTop />
@@ -29,10 +31,22 @@ const Rotas = () => {
         <Route exact path="/" Component={Home} />
         <Route exact path="/eventos" Component={Eventos} />
         <Route exact path="/eventos/:id" Component={EventoById} />
+        <Route
+          path="/repositorios"
+          element={userData.logado ? <Respositorios/> : <Login/>}
+        />
         <Route exact path="/repositorios" Component={Respositorios} />
         <Route exact path="/equipe" Component={Equipe} />
         <Route exact path="/login" Component={Login}/>
-        <Route exact path="/Dashboard" Component={Dashboard}/>
+
+        <Route
+          path="/Dashboard"
+          element={userData.logado ? <Dashboard/> : <Login/>}
+        />
+         <Route
+          path="/DashboardAdmin"
+          element={userData.logado ? <DashboardAdmin/> : <Login/>}
+        />
       </Routes>
     </Router>
   );

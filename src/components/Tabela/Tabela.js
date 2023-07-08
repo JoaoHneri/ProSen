@@ -35,6 +35,12 @@ const Tabela = ({ projetoFiltrado }) => {
     console.log(projetoFiltrado);
   }, [Projeto]);
 
+  const formatDate = (date) => {
+    const [year, month, day] = date.split("-");
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div className="table-wrapper">
       <table>
@@ -54,13 +60,13 @@ const Tabela = ({ projetoFiltrado }) => {
           {projetoFilter.length < 0 ? (
             Projeto ? (
               Projeto.map((projeto) => (
-                <tr>
+                <tr key={projeto.id}>
                   <td>{projeto.area}</td>
                   <td>{projeto.title}</td>
                   <td>{projeto.authors}</td>
                   <td>{projeto.type}</td>
                   <td>{projeto.supervisor}</td>
-                  <td>{projeto.date}</td>
+                  <td>{formatDate(projeto.date)}</td>
                   <td>
                     <a
                       target="_blank"
@@ -88,13 +94,13 @@ const Tabela = ({ projetoFiltrado }) => {
             )
           ) : projetoFilter ? (
             projetoFilter.map((projeto) => (
-              <tr>
+              <tr key={projeto.id}>
                 <td>{projeto.area}</td>
                 <td>{projeto.title}</td>
                 <td>{projeto.authors}</td>
                 <td>{projeto.type}</td>
                 <td>{projeto.supervisor}</td>
-                <td>{projeto.date}</td>
+                <td>{formatDate(projeto.date)}</td>
                 <td>
                   <a
                     target="_blank"
@@ -108,7 +114,7 @@ const Tabela = ({ projetoFiltrado }) => {
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href={`${process.env.REACT_APP_API}/temp/uploads/${projeto.src.key}`}
+                    href={`${process.env.REACT_APP_API}temp/uploads/${projeto.src.key}`}
                   >
                     <img src={pdf} alt="PDF" />
                   </a>

@@ -2,7 +2,12 @@
     position: relative;
     padding-top: 90vh;
   }
-  
+  #circle-edit{
+    color: #F7971D;
+    font-size: 50pt;
+    margin-left: 0;
+    margin-right: 25px;
+  }
   .bannerEquipe {
     position: absolute;
     top: 0;
@@ -51,6 +56,11 @@
   @media (max-width: 480px) {
     .bannerEquipe .hero-content h1 {
       font-size: 2.5rem;
+    }
+    #circle-edit{
+      color: #F7971D;
+      font-size: 12pt;
+ 
     }
   }
   

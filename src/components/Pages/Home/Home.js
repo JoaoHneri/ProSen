@@ -124,9 +124,11 @@ export const Home = () => {
         </div>
         <div className="BoxRepositories no-margin" id="Repositorio">
           <p>Conheça o Repositório de Projetos SENAI Feira de Santana</p>
+          <Link to={'/repositorios'}>
           <button>
             CLIQUE AQUI <img src={Vector} alt="Clique Aqui" />
           </button>
+          </Link>
         </div>
       </div>
       <div className="contCards" id="Eventos">

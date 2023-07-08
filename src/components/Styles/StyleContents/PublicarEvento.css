@@ -1,3 +1,6 @@
+#color-bg{
+  padding: 20px;
+}
 .itens-form{
     display: flex;
     margin-top: 1rem;
@@ -34,6 +37,8 @@
     gap: 20px;
     width: 100%;
     justify-content: space-around;
+    border-bottom: solid 2px #D9D9D9;
+   
   }
   
   .form-edit-section {
@@ -42,6 +47,9 @@
     margin-left: 20px;
     justify-content: space-around;
     width: 100%;
+    padding: 0px 25px 25px 0px;
+    border-right: solid 2px #D9D9D9;
+    ;
   }
   
   .img-form-input img {
@@ -63,7 +71,15 @@
   .custom-uploaded-image {
     width: 300px;
   }
-  
+  #imgicon{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  .tx-form{
+    display: flex;
+    align-items: center;
+    }
   .input {
     width: 100%;
     padding: 12px;
@@ -82,6 +98,36 @@
     color: red;
   }
   
+  .inputFileEvent{
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px dashed #B2B2B2;
+    background: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+  }
+
+  #UpIconAdd{
+    width: 26px;
+  height: 26px;
+
+
+  }
+
+  .ftn-file{
+    padding-bottom: 25px;
+    border-bottom: solid 2px #D9D9D9;
+
+  }
+
+
+
+
   @keyframes justshake {
     25% {
       transform: translateX(5px);
@@ -99,3 +145,54 @@
       transform: translateX-(5px);
     }
   }
+
+  @media screen and (max-width: 768px) {
+    #color-bg {
+      padding: 10px;
+    }
+    
+    .itens-form,
+    .itens-form-text {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+    
+    .tx-form {
+      margin-left: 0;
+      padding-top: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .form-edit-section-size,
+    .form-edit-section {
+      flex-direction: column;
+      margin-left: 0;
+      border: none;
+    }
+    
+    .img-form-input img {
+      width: 100%;
+    }
+    
+    .uploaded-image {
+      margin-right: 0;
+    }
+    
+    .custom-uploaded-image {
+      width: 100%;
+    }
+    
+    .inputFileEvent {
+      width: 100%;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+    
+    #UpIconAdd {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  

@@ -12,6 +12,8 @@ import Dashboard from "../components/Pages/Dashboard/Dashboard"
 import DashboardAdmin from "../components/Pages/DashboardAdmin/DashboardAdmin"
 import { useContext } from "react";
 import { UserContext } from "../components/useContext/UserContext";
+import api from "../services/api"
+
 
 function ToTop() {
   const { pathname } = useLocation();
@@ -23,7 +25,30 @@ function ToTop() {
 
 const Rotas = () => {
   const [userData, setUserData] = useContext(UserContext);
-  console.log(userData.logado);
+  const userId = userData.id;
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await api.get(`/user/${userId}`);
+        const user = response.data;
+
+        if (user.logado) {
+          setUserData({ ...userData, logado: true, admin: user.tipoAdmin });
+        } else {
+          setUserData({ ...userData, logado: false, admin: false });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (userData.logado) {
+      getUserData();
+    }
+  }, [userData.logado, setUserData, userId]);
+
+
   return (
     <Router>
       <ToTop />
@@ -41,11 +66,19 @@ const Rotas = () => {
 
         <Route
           path="/Dashboard"
-          element={userData.logado ? <Dashboard/> : <Login/>}
-        />
-         <Route
-          path="/DashboardAdmin"
           element={userData.logado ? <DashboardAdmin/> : <Login/>}
+        />
+           <Route
+          path="/DashboardAdmin"
+          element={
+
+       
+            userData.logado ? (
+              <Dashboard />
+            ) : (
+              <Login />
+            )
+          }
         />
       </Routes>
     </Router>

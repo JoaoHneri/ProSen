@@ -13,7 +13,7 @@ import { FiX, FiXCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 
-const Dashboard = () => {
+const DashboardAdmin = () => {
   const [activeComponent, setActiveComponent] = useState("perfil");
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate(true);
@@ -43,6 +43,7 @@ const Dashboard = () => {
     localStorage.setItem("name_Prosen", "");
     localStorage.setItem("id_Prosen", "");
     localStorage.removeItem("logado_Prosen");
+    localStorage.removeItem("authAdmin_Prosen");
     await navigate("/");
     window.location.reload(true);
     e.preventDefault();
@@ -100,4 +101,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardAdmin;

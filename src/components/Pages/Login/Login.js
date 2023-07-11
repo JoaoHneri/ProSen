@@ -31,12 +31,14 @@ function Login() {
       const id = JSON.stringify(Data.data.usuario._id).replace(/["]/g, "");
       const nome = JSON.stringify(Data.data.usuario.name).replace(/["]/g, "");
       const emailProsen = JSON.stringify(Data.data.usuario.email).replace(/["]/g, "");
+      const authAdmin = JSON.stringify(Data.data.usuario.authAdmin).replace(/["]/g, "");
 
       localStorage.setItem("token_Prosen", tokenGuard);
       localStorage.setItem("id_Prosen", id);
       localStorage.setItem("name_Prosen", nome);
       localStorage.setItem("email_Prosen", emailProsen);
       localStorage.setItem("logado_Prosen", true);
+      localStorage.setItem("authAdmin_Prosen", authAdmin);
       await navigate("/");
       window.location.reload(true);
     }catch{

@@ -38,7 +38,7 @@ function NavBar() {
             </Nav.Link>
             <div className="link-nav-login">
               {userData.logado ? (
-                <Link to={"/dashboardAdmin"}>
+                <Link to={"/dashboard"}>
                   <Nav.Link id="link-nav" href="#link">
                     Bem vindo {userData.name}
                   </Nav.Link>

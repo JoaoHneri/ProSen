@@ -8,7 +8,9 @@ export function UserProvider(props) {
     id: localStorage.getItem("id_Prosen"),
     name: localStorage.getItem("name_Prosen"),
     email: localStorage.getItem("email_Prosen"),
-    logado: localStorage.getItem("logado_Prosen"),// Adicione o campo tipoAdmin
+    logado: localStorage.getItem("logado_Prosen"),
+    authAdmin: localStorage.getItem("authAdmin_Prosen"),
+    
   });
 
   return (

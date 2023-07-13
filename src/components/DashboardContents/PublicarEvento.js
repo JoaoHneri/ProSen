@@ -1,4 +1,4 @@
-import React, { useRef,useState } from "react";
+import React, { useRef, useState } from "react";
 import imgForm from "../../Imagens/imageForm.png";
 import "../Styles/StyleContents/PublicarEvento.css";
 import FileVideo from "../Configs/InputVideo";
@@ -8,10 +8,10 @@ import { AiOutlinePlus } from "react-icons/ai";
 import api from "../../services/api";
 import { useContext } from "react";
 import { UserContext } from "../useContext/UserContext";
-import Upload from '../../Imagens/Upload.png'
-import AddImageEvent from '../../Imagens/AddImageEvent.png'
+import Upload from "../../Imagens/Upload.png";
+import AddImageEvent from "../../Imagens/AddImageEvent.png";
 import { useNavigate } from "react-router-dom";
-import iconTitle from "../../Imagens/iconTitle.png"
+import iconTitle from "../../Imagens/iconTitle.png";
 const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);
   const [files, setFiles] = useState([]);
@@ -24,6 +24,8 @@ const PublicarEvento = () => {
   const [file, setFile] = useState(null);
   const inputFileRef = useRef(null);
   const navigate = useNavigate();
+  const [previews, setPreviews] = useState([]);
+  const inputFileRefs = useRef([]);
 
   // console.log(title)
   // console.log(startDate)
@@ -32,33 +34,9 @@ const PublicarEvento = () => {
   // console.log(type)
   // console.log(descricao)
 
-
-
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: "image/*",
-    multiple: true,
-    onDrop: (acceptedFiles) => {
-      setFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
-    },
-  });
-  const handleFileSelect = () => {
-    inputFileRef.current.click();
-  };
-  
-
-  const removeFile = (index) => {
-    setFiles((prevFiles) => {
-      const newFiles = [...prevFiles];
-      newFiles.splice(index, 1);
-      return newFiles;
-    });
-  };
-
-
   const formatDate = (date) => {
     const formattedDate = new Date(date);
-    const formattedDateString = formattedDate.toISOString().split('T')[0];
+    const formattedDateString = formattedDate.toISOString().split("T")[0];
     return formattedDateString;
   };
 
@@ -66,14 +44,28 @@ const PublicarEvento = () => {
     return time.replace(/\D/g, "");
   };
 
-  const handleFileChange = (event) => {
-    const selectedFiles = Array.from(event.target.files);
-    setFiles(selectedFiles);
+  const handleFileChange = (event, index) => {
+    const selectedFile = event.target.files[0];
+    setFiles((prevFiles) => {
+      const newFiles = [...prevFiles];
+      newFiles[index] = selectedFile;
+      return newFiles;
+    });
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPreviews((prevPreviews) => {
+        const newPreviews = [...prevPreviews];
+        newPreviews[index] = reader.result;
+        return newPreviews;
+      });
+    };
+    reader.readAsDataURL(selectedFile);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const url = "/event"; // Sua rota /event aqui
       const userId = userData.id;
@@ -85,20 +77,21 @@ const PublicarEvento = () => {
       data.append("type", type);
       data.append("descricao", descricao);
       data.append("startDate", formatDate(startDate));
-      
       files.forEach((file, index) => {
-        data.append(`file_${index}`, file);
+        data.append("src", file);
       });
-  
+
       const response = await api.post(url, data);
-      alert('Sucesso, Evento Publicado!')
-      navigate('/eventos')
+      alert("Sucesso, Evento Publicado!");
+      navigate("/eventos");
       console.log(response.data); // Mensagem de sucesso e dados do evento
-  
+
       // Faça algo com a resposta, como redirecionar para outra página
     } catch (error) {
       console.error(error);
-      alert('Publicação do Evento falhou, verifique se todos os campos estão preenchidos corretamente')
+      alert(
+        "Publicação do Evento falhou, verifique se todos os campos estão preenchidos corretamente"
+      );
       // Trate o erro aqui
     }
   };
@@ -112,7 +105,42 @@ const PublicarEvento = () => {
   const handleDragOver = (e) => {
     e.preventDefault();
   };
-  
+  const handleFileSelect = (index) => {
+    inputFileRefs.current[index].click();
+  };
+
+  const removeFile = (index) => {
+    setFiles((prevFiles) => {
+      const newFiles = [...prevFiles];
+      newFiles.splice(index, 1);
+      return newFiles;
+    });
+    setPreviews((prevPreviews) => {
+      const newPreviews = [...prevPreviews];
+      newPreviews.splice(index, 1);
+      return newPreviews;
+    });
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/*",
+    multiple: true,
+    onDrop: (acceptedFiles) => {
+      const remainingSlots = 8 - files.length;
+      const filesToBeAdded = acceptedFiles.slice(0, remainingSlots);
+      setFiles((prevFiles) => [...prevFiles, ...filesToBeAdded]);
+
+      const newPreviews = [...previews];
+      acceptedFiles.slice(0, remainingSlots).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          newPreviews.push(reader.result);
+          setPreviews(newPreviews);
+        };
+        reader.readAsDataURL(file);
+      });
+    },
+  });
 
   return (
     <>
@@ -120,7 +148,7 @@ const PublicarEvento = () => {
         <form>
           <div id="color-bg">
             <div className="tx-form">
-            <img alt="" id="imgicon" src={iconTitle}/>
+              <img alt="" id="imgicon" src={iconTitle} />
               <h4>Dados Do Evento</h4>
             </div>
             <div className="form-edit-section-size">
@@ -132,7 +160,9 @@ const PublicarEvento = () => {
                     name="title"
                     className="input"
                     value={title}
-                    onChange={(e)=>{setTitle(e.target.value)}}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="itens-form">
@@ -142,7 +172,9 @@ const PublicarEvento = () => {
                     name="startDate"
                     className="input"
                     value={startDate}
-                    onChange={(e)=>{setStateDate(e.target.value)}}
+                    onChange={(e) => {
+                      setStateDate(e.target.value);
+                    }}
                   />
                   <label className="edit-label">Horário:</label>
                   <input
@@ -150,7 +182,9 @@ const PublicarEvento = () => {
                     name="hour"
                     className="input"
                     value={hour}
-                    onChange={(e)=>{setHour(e.target.value)}}
+                    onChange={(e) => {
+                      setHour(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="itens-form">
@@ -159,24 +193,28 @@ const PublicarEvento = () => {
                     name="local"
                     className="input"
                     value={local}
-                    onChange={(e)=>{setLocal(e.target.value)}}
+                    onChange={(e) => {
+                      setLocal(e.target.value);
+                    }}
                   >
                     <option value="">Selecione o Local do Evento</option>
-                    <option value="Senai - Feira de Santana">Senai - Feira de Santana</option>
-                    <option value="Senai - Salvador" >
-                      Senai - Salvador
+                    <option value="Senai - Feira de Santana">
+                      Senai - Feira de Santana
                     </option>
+                    <option value="Senai - Salvador">Senai - Salvador</option>
                   </select>
                   <label className="edit-label">Modalidade:</label>
                   <select
                     name="type"
                     className="input"
                     value={type}
-                    onChange={(e)=>{setType(e.target.value)}}
+                    onChange={(e) => {
+                      setType(e.target.value);
+                    }}
                   >
                     <option value="">Selecione o tipo do evento</option>
                     <option value="Evento Presencial">Evento Presencial</option>
-                    <option value="Evento a distância" >
+                    <option value="Evento a distância">
                       Evento A Distância
                     </option>
                   </select>
@@ -192,79 +230,75 @@ const PublicarEvento = () => {
                     rows="3"
                     placeholder="Digite a descrição"
                     value={descricao}
-                    onChange={(e)=>{setDescricao(e.target.value)}}
+                    onChange={(e) => {
+                      setDescricao(e.target.value);
+                    }}
                   ></textarea>
                 </div>
-              </div>  
-              <div >
-                  
-                    <label htmlFor="fileInput" className="fileInputContainer">
-                      <span className="labelText">
-                        <div><img id="UpIcon" src={Upload} alt="Arraste o arquivo"/></div>
-                        <p id="arrest">Arraste e solte o arquivo aqui</p>
-                        <p id="or">ou <span id="sele">selecione o arquivo</span></p>
-                      </span>
-                      
-                      <input
-                        ref={inputFileRef}
-                        id="fileInput"
-                        type="file"
-                        style={{ display: "none" }}
-                        name="file"
-                      />
-                      
-                    </label>
+              </div>
+              <div>
+                <label htmlFor="fileInput" className="fileInputContainer">
+                  <span className="labelText">
+                    <div>
+                      <img id="UpIcon" src={Upload} alt="Arraste o arquivo" />
+                    </div>
+                    <p id="arrest">Arraste e solte o arquivo aqui</p>
+                    <p id="or">
+                      ou <span id="sele">selecione o arquivo</span>
+                    </p>
+                  </span>
+
+                  <input
+                    ref={inputFileRef}
+                    id="fileInput"
+                    type="file"
+                    style={{ display: "none" }}
+                    name="file"
+                  />
+                </label>
               </div>
             </div>
             <div className="ftn-file">
               <h5>Fotos do Evento</h5>
               <div className="img-form-input">
                 <div
-                  onDrop={handleFileDrop}
-                  onDragOver={handleDragOver}
-                >
-                  {file ? (
-                    <div>
-                      <span>Arquivo selecionado:</span>
-                      <br />
-                      <span>{file.name}</span>
-                    </div>
-                  ) : (
-                    <label htmlFor="fileInput" className="fileInputContainer" onClick={handleFileSelect}>
-  <span className="labelText">
-    <div><img id="UpIconAdd" src={AddImageEvent} alt="Arraste o arquivo"/></div>
-  </span>
-  <input
-    ref={inputFileRef}
-    id="fileInput"
-    type="file"
-    style={{ display: "none" }}
-    name="file"
-    onChange={(e) => {
-      setFile(e.target.files[0]);
-    }}
-  />
-</label>
-
-                  )}
-                </div>
-              </div>
-              <div className="input-file-edit">
-                {/* <div
                   {...getRootProps()}
                   className={`dropzone ${isDragActive ? "active" : ""}`}
                 >
                   <input {...getInputProps()} />
                   <p>
-                    Arraste e solte os arquivos aqui ou clique para selecionar.
+                    Arraste e solte as imagens aqui ou clique para selecionar.
                   </p>
-                </div> */}
-                {/* <input type="file" name="file" onChange={(e) => setFile(e.target.files[0])} /> */}
+                </div>
+                <div className="selected-files">
+                  {previews.map((preview, index) => (
+                    <div key={index} className="file-item">
+                      <img src={preview} alt={`Preview ${index}`} />
+                      <button onClick={() => removeFile(index)}>Remover</button>
+                    </div>
+                  ))}
+                  {files.length < 8 && (
+                    <label
+                      className="file-input-label"
+                      onClick={() => handleFileSelect(files.length)}
+                    >
+                      <span>+</span>
+                      <input
+                        ref={inputFileRefs.current[files.length]}
+                        type="file"
+                        style={{ display: "none" }}
+                        name="src" // Altere o nome do campo de formulário para 'src'
+                        onChange={(e) => handleFileChange(e, files.length)}
+                      />
+                    </label>
+                  )}
+                </div>
               </div>
             </div>
-
             <div className="upArq">
-              <button onClick={handleSubmit}>Publicar Evento</button>
+              <button type="submit" onClick={handleSubmit}>
+                Publicar Evento
+              </button>
             </div>
           </div>
         </form>

@@ -9,7 +9,7 @@ import Upload from '../../Imagens/Upload.png';
 import { useNavigate } from "react-router-dom";
 import iconTitle from "../../Imagens/iconTitle.png"
 const CadastrarProfessor = () => {
-    const [name, setName] = useState("");
+  const [name, setName] = useState("");
   const [record, setRecord] = useState("");
   const [graduation, setGraduation] = useState("");
   const [LevelofEducation, setLevelofEducation] = useState("")
@@ -29,7 +29,7 @@ const CadastrarProfessor = () => {
     try {
       // Crie um objeto FormData para enviar os dados e o arquivo
       const formData = new FormData();
-      formData.append("nameUser", name);
+      formData.append("name", name);
       formData.append("record", record);
       formData.append("graduation", graduation);
       formData.append("LevelofEducation", LevelofEducation);
@@ -52,6 +52,7 @@ const CadastrarProfessor = () => {
     
       console.log(message);
       // Redirecione para a página desejada
+      alert("cadastro feito")
       navigate("/dashboard");
     } catch (error) {
       console.error(error);

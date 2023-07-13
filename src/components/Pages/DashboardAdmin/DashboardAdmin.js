@@ -5,7 +5,7 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import "../../Styles/Dashboard.css";
 import Profile from "../../DashboardContentsAdmin/Profile";
-import PublicarEvento from "../../DashboardContentsAdmin/PublicarEvento";
+import PublicarEvento from "../../DashboardContents/PublicarEvento";
 import CadastrarProfessor from"../../DashboardContentsAdmin/CadastrarProfessor"
 import EditarProfessor from"../../DashboardContentsAdmin/EditarProfessor"
 import EditarEvento from "../../DashboardContentsAdmin/EditarEvento";
@@ -70,7 +70,10 @@ const DashboardAdmin = () => {
           <button className="nav-button" onClick={() => setActiveComponent("perfil")}>
             Perfil
           </button>
-       
+          
+          <button className="nav-button" onClick={() => setActiveComponent("cadastrar-professor")}>
+            Cadastrar Professor
+          </button>
           <button className="nav-button" onClick={() => setActiveComponent("publicar-evento")}>
             Publicar Evento
           </button>

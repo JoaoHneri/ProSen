@@ -412,7 +412,9 @@ p{
       height: 54px;
       border: none;
       margin-right: 25px;
+
     }
+    
     @media (max-width: 768px) {
       .seeButton {
         padding: 16px 24px; /* Reduza o espaçamento interno */
@@ -445,5 +447,7 @@ p{
         margin-top: 20px; /* Adicione um espaçamento superior */
       }
     }
+
+
     
 

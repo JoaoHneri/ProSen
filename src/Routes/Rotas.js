@@ -17,6 +17,7 @@ import DashboardAdmin from "../components/Pages/DashboardAdmin/DashboardAdmin";
 import { useContext } from "react";
 import { UserContext } from "../components/useContext/UserContext";
 import api from "../services/api";
+import CadastrarProfessor from "../components/DashboardContentsAdmin/CadastrarProfessor";
 
 function ToTop() {
   const { pathname } = useLocation();
@@ -69,6 +70,8 @@ const Rotas = () => {
           path="/Dashboard"
           element={userData.logado ? userData.authAdmin === 'false' ? <Dashboard /> : <DashboardAdmin /> : <Login/>}
         />
+
+        <Route path="/CadastrarProfessor" element={userData.logado ? <CadastrarProfessor/> : <Login/>}/>
           {/* <Route
           path="/DashboardAdmin"
           element={userData.authAdmin === 'true' ? <DashboardAdmin /> : <Login />}

@@ -3,7 +3,18 @@ import "../Styles/TabelaDashboard.css";
 
 
 
-const TabelaEditEvent = () => {
+const TabelaEditEvent = ({eventsUser, onSelectEvent}) => {
+
+  function formatarDataBrasileira(data) {
+    const dateObj = new Date(data);
+
+    const dia = String(dateObj.getDate()).padStart(2, "0");
+    const mes = String(dateObj.getMonth() + 1).padStart(2, "0"); // Os meses são indexados a partir de 0, então é necessário adicionar +1
+    const ano = dateObj.getFullYear();
+
+    return `${dia}/${mes}/${ano}`;
+  }
+
   return (
     <div className="table-wrapper">
       <table>
@@ -16,18 +27,14 @@ const TabelaEditEvent = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>22/05/2023</td>
-            <td>Mostra de Projetos e Pesquisa Científica 2023.1</td>
-            <td>SENAI - FEIRA DE SANTANA</td>
+          {eventsUser.map((event) =>(
+            <tr>
+            <td><input type="radio" onChange={() => onSelectEvent(event._id)}/></td>
+            <td>{formatarDataBrasileira(event.startDate)}</td>
+            <td>{event.title}</td>
+            <td>{event.local}</td>
           </tr>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>22/05/2023</td>
-            <td>Mostra de Projetos e Pesquisa Científica 2023.1</td>
-            <td>SENAI - FEIRA DE SANTANA</td>
-          </tr>
+          ))}
         </tbody>
       </table>
     </div>

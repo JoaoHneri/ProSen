@@ -18,6 +18,8 @@ import { useContext } from "react";
 import { UserContext } from "../components/useContext/UserContext";
 import api from "../services/api";
 import CadastrarProfessor from "../components/DashboardContentsAdmin/CadastrarProfessor";
+import EventEdit from "../components/Atualizações/EventEdit";
+import ProjectEdit from "../components/Atualizações/ProjectEdit";
 
 function ToTop() {
   const { pathname } = useLocation();
@@ -66,6 +68,8 @@ const Rotas = () => {
         <Route exact path="/repositorios" Component={Respositorios} />
         <Route exact path="/equipe" Component={Equipe} />
         <Route exact path="/login" Component={Login} />
+        <Route exact path="/EditarEvento/:id" Component={EventEdit} />
+        <Route exact path="/EditarProjeto/:id" Component={ProjectEdit} />
         <Route
           path="/Dashboard"
           element={userData.logado ? userData.authAdmin === 'false' ? <Dashboard /> : <DashboardAdmin /> : <Login/>}

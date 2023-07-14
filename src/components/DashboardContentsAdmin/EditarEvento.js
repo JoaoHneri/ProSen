@@ -2,8 +2,12 @@ import React from "react";
 import Search from "../../Imagens/search.png";
 import { Dropdown } from "react-bootstrap";
 import TabelaEditEvent from "../Tabela/TabelaEditEvent";
-import iconTitle from "../../Imagens/iconTitle.png"
+import iconTitle from "../../Imagens/iconTitle.png";
+
+
 function EditarEvento(){
+  
+
     return(
     <>
    <div className="content-action editProj">

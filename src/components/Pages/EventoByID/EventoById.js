@@ -113,7 +113,7 @@ const EventoById = () => {
               className="imageToPost"
               src={
                 Event
-                  ? `${process.env.REACT_APP_API}temp/uploads/${Event.src.key}`
+                  ? `${process.env.REACT_APP_API}temp/uploads/${Event.src[0].key}`
                   : "carregando"
               }
               alt="Foto do evento"

@@ -3,7 +3,7 @@ import "../Styles/TabelaDashboard.css";
 
 
 
-const TabelaEditProfessor = () => {
+const TabelaEditProfessor = ({}) => {
   return (
     <div className="table-wrapper">
       <table>

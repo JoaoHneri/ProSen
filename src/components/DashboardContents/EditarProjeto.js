@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../../Imagens/search.png";
 import { Dropdown } from "react-bootstrap";
 import TabelaDashboard from "../Tabela/TabelaDashboard";
+import api from "../../services/api";
+import { useContext } from "react";
+import { UserContext } from "../useContext/UserContext";
+import { Link } from "react-router-dom";
 
 function EditarProjeto(){
+  const[project, setProject] = useState([]);
+  const [userData, setUserData] = useContext(UserContext);
+  const [selectedProjectId, setSelectedProjectId] = useState("");
+
+
+  async function getUserProjects(){
+    try {
+      const project = await api.get(`/project/${userData.id}`);
+      const {data} = project;
+      setProject(data.projects)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() =>{
+    getUserProjects();
+  },[api]);
+
+  const handleProjectSelect = (projectId) => {
+    setSelectedProjectId(projectId);
+  };
+
     return(
     <>
    <div className="content-action editProj">
@@ -39,9 +66,12 @@ function EditarProjeto(){
           </div>
        </div>
        <div>
-        <TabelaDashboard/>
+        <TabelaDashboard project={project} onProjectSelect={handleProjectSelect}/>
         <div className="upArq">
-          <button>Editar Projeto</button>
+          <Link to={`/EditarProjeto/${selectedProjectId}`}>
+              <button>Editar Projeto</button>
+          </Link>
+          
         </div>
        </div>
     </>

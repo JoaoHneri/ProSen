@@ -1,9 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import Search from "../../Imagens/search.png";
 import { Dropdown } from "react-bootstrap";
 import TabelaEditEvent from "../Tabela/TabelaEditEvent";
+import api from "../../services/api";
+import { UserContext } from "../useContext/UserContext";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function EditarEvento(){
+
+  const [userData, setUserData] = useContext(UserContext);
+  const [eventsUser, setEventsUser] = useState([]);
+  const [EventId, setEvent] = useState('');
+  console.log(EventId);
+
+
+
+  async function getEventByUserId(){
+    try {
+      const event = await api.get(`/event/user/${userData.id}`);
+      const {data} = event;
+      setEventsUser(data.events);
+
+    } catch (error) {
+      console.log('Erro ao obter Eventos')
+    }
+  }
+
+  useEffect(()=>{
+    getEventByUserId();
+  },[api]);
+  
+  console.log(eventsUser);
+
+  const handleEventSelection = (eventId) => {
+    setEvent(eventId);
+  };
+
     return(
     <>
    <div className="content-action editProj">
@@ -39,9 +72,11 @@ function EditarEvento(){
           </div>
        </div>
        <div>
-        <TabelaEditEvent/>
+        <TabelaEditEvent eventsUser={eventsUser} onSelectEvent={handleEventSelection} />
         <div className="upArq">
-          <button>Editar Evento</button>
+          <Link to={`/EditarEvento/${EventId}`}>
+            <button>Editar Evento</button>
+          </Link>
         </div>
        </div>
        

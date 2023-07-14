@@ -4,7 +4,14 @@ import { Dropdown } from "react-bootstrap";
 import iconTitle from "../../Imagens/iconTitle.png"
 import TabelaEditProfessor from "../Tabela/TabelaEditProfessor";
 import "../Styles/StyleContents/EditarProfessor.css"
+import api from "../../services/api";
+import { UserContext } from "../useContext/UserContext";
+import { useState, useEffect } from "react";
+
 function EditarProfessor(){
+
+
+
     return(
     <>
    <div className="content-action editProj">

@@ -2,7 +2,18 @@ import React from "react";
 import "../Styles/TabelaDashboard.css";
 
 
-const TabelaDashboard = () => {
+const TabelaDashboard = ({project, onProjectSelect }) => {
+
+  function formatarDataBrasileira(data) {
+    const dateObj = new Date(data);
+
+    const dia = String(dateObj.getDate()).padStart(2, "0");
+    const mes = String(dateObj.getMonth() + 1).padStart(2, "0"); // Os meses são indexados a partir de 0, então é necessário adicionar +1
+    const ano = dateObj.getFullYear();
+
+    return `${dia}/${mes}/${ano}`;
+  }
+
   return (
     <div className="table-wrapper">
       <table>
@@ -18,43 +29,19 @@ const TabelaDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>22/05/2023</td>
-            <td>Desenvolvimento de Sistemas</td>
-            <td>A IMPORTÂNCIA DO SONO: APLICATIVO CHAMADO MORPHEUS</td>
+          {project.map((project)=>(
+            <tr key={project._id}>
+            <td><input type="radio" onChange={() => onProjectSelect(project._id)}/></td>
+            <td>{formatarDataBrasileira(project.date)}</td>
+            <td>{project.area}</td>
+            <td>{project.title}</td>
             <td>
-              OLIVEIRA, Washington L.J.; GONÇALVES, João V. S.; PEDRO, Lian S.
-              F.; TAMESON , Aberlan.
+              {project.authors}
             </td>
-            <td>Projeto Inovação</td>
-            <td>PASSOS, Ingrid B. A.</td>
+            <td>{project.type}</td>
+            <td>{project.supervisor}</td>
           </tr>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>22/05/2023</td>
-            <td>Desenvolvimento de Sistemas</td>
-            <td>A IMPORTÂNCIA DO SONO: APLICATIVO CHAMADO MORPHEUS</td>
-            <td>
-              OLIVEIRA, Washington L.J.; GONÇALVES, João V. S.; PEDRO, Lian S.
-              F.; TAMESON , Aberlan.
-            </td>
-            <td>Projeto Inovação</td>
-            <td>PASSOS, Ingrid B. A.</td>
-          </tr>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>22/05/2023</td>
-            <td>Desenvolvimento de Sistemas</td>
-            <td>A IMPORTÂNCIA DO SONO: APLICATIVO CHAMADO MORPHEUS</td>
-            <td>
-              OLIVEIRA, Washington L.J.; GONÇALVES, João V. S.; PEDRO, Lian S.
-              F.; TAMESON , Aberlan.
-            </td>
-            <td>Projeto Inovação</td>
-            <td>PASSOS, Ingrid B. A.</td>
-          </tr>
-          
+          ))}
         </tbody>
       </table>
     </div>

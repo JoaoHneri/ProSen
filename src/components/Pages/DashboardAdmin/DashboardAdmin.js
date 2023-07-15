@@ -8,7 +8,7 @@ import Profile from "../../DashboardContents/Profile";
 import PublicarEvento from "../../DashboardContents/PublicarEvento";
 import CadastrarProfessor from"../../DashboardContentsAdmin/CadastrarProfessor"
 import EditarProfessor from"../../DashboardContentsAdmin/EditarProfessor"
-import EditarEvento from "../../DashboardContentsAdmin/EditarEvento";
+import EditarEvento from "../../DashboardContents/EditarEvento";
 import { FiX, FiXCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";

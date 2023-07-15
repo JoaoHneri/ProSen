@@ -88,7 +88,16 @@ p{
     overflow-x: hidden;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 1150px) {
+    #img-sec-01 {
+      max-width: 300px;
+      position: relative;
+      top: -20px; 
+      right: 13px; 
+    }
+  }
+
+  @media (max-width: 790px) {
     #section {
       flex-direction: column;
       align-items: center;
@@ -144,6 +153,8 @@ p{
       width: 350px;
       margin-right: 0;
     }
+
+    
   }
   
   .div-title h1{
@@ -227,7 +238,7 @@ p{
     margin-left: 20px;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 790px) {
     .Section_Prosen h1 {
       font-size: 36px;
       line-height: 42px;
@@ -325,7 +336,7 @@ p{
       z-index: 1;
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
       .BoxRepositories {
         flex-direction: column;
         justify-content: center;
@@ -418,7 +429,7 @@ p{
 
     }
     
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
       .seeButton {
         padding: 16px 24px; /* Reduza o espaçamento interno */
       }
@@ -449,7 +460,23 @@ p{
         margin-right: 0; /* Remova a margem direita */
         margin-top: 20px; /* Adicione um espaçamento superior */
       }
+      
+      
     }
+
+    @media (max-width: 1400px) {
+      .edit-text{
+      margin-left: 0px;
+      margin-right: 100px;
+    }
+    .text-column{
+      display: flex;
+      flex-direction: column;
+    }
+
+    }
+
+    
 
 
     

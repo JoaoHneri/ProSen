@@ -29,7 +29,14 @@ function Profile() {
       <div className="content-action">
         <div className="content-avatar">
           <div class="avatar">
-            <img src={`${process.env.REACT_APP_API}`} alt="Imagem do Usuário" />
+          {user && user.file && user.file.key ? (
+              <img
+                src={`${process.env.REACT_APP_API}temp/uploads/${user.file.key}`}
+                alt="Descrição da imagem"
+              />
+            ) : (
+              "carregando"
+            )}
           </div>
         </div>
         <div className="content-dados">

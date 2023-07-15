@@ -66,6 +66,7 @@ function Login() {
               <div class="inputbox-2">
                 <input
                   type="text"
+                  id="form-edit-input"
                   placeholder="Email"
                   required="required"
                   onChange={(e) => setEmail(e.target.value)}

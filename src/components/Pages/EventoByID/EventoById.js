@@ -61,8 +61,6 @@ const EventoById = () => {
     const horaFormatada = hora.substring(0, 2) + ":" + hora.substring(2);
     return horaFormatada;
   }
-  
-  
 
   return (
     <div>
@@ -109,17 +107,15 @@ const EventoById = () => {
         </div>
         <div className="divFotos">
           <div>
-            {
-              Event ?
-              Event.src.map((event) =>(
-                <img className="imageToPost" src={`${process.env.REACT_APP_API}temp/uploads/${event.key}`} alt="Fotos do Evento"/>
-              ))
-              : "Carregando"
-            
-            }
-
-
-           
+            {Event
+              ? Event.src.map((event) => (
+                  <img
+                    className="imageToPost"
+                    src={`${process.env.REACT_APP_API}temp/uploads/${event.key}`}
+                    alt="Fotos do Evento"
+                  />
+                ))
+              : "Carregando"}
           </div>
         </div>
       </div>
@@ -131,14 +127,18 @@ const EventoById = () => {
           </button>
         </div>
         <div className="divVideos">
-          <div>
-            <img src={ImageVideo} alt="Video do evento" />
-          </div>
-          <div>
-            <img src={video2} alt="Video do evento" />
-          </div>
-          <div>
-            <img src={video3} alt="Video do evento" />
+          <div >
+            {Event
+              ? Event.video.map((event) => (
+                  <video
+                    className="vidInt"
+                    src={`${process.env.REACT_APP_API}temp/uploads/${event.key}`}
+                    controls
+                  >
+                    Seu navegador não suporta a tag de vídeo.
+                  </video>
+                ))
+              : "Carregando"}
           </div>
         </div>
       </div>

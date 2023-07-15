@@ -19,6 +19,7 @@ import { UserContext } from "../components/useContext/UserContext";
 import EditProject from "../components/Atualizações/ProjectEdit";
 import EventEdit from "../components/Atualizações/EventEdit";
 import EditarEvento from "../components/DashboardContents/EditarEvento";
+import ProfessoresEdit from "../components/Atualizações/ProfessoresEdit";
 
 function ToTop() {
   const { pathname } = useLocation();
@@ -66,6 +67,7 @@ const Rotas = () => {
 
       <Route exact path="/EditarProjeto/:id" Component={EditProject} />
       <Route exact path="/EditarEvento/:id" Component={EventEdit} />
+      <Route exact path="/EditarProfessor/:id" Component={ProfessoresEdit} />
 
         <Route path="/CadastrarProfessor" element={userData.logado ? <CadastrarProfessor/> : <Login/>}/>
       </Routes>

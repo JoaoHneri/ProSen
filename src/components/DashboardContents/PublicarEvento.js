@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import imgForm from "../../Imagens/imageForm.png";
 import "../Styles/StyleContents/PublicarEvento.css";
-import FileVideo from "../Configs/InputVideo";
 import { useDropzone } from "react-dropzone";
 import "../Styles/InputFile.css";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -12,6 +11,7 @@ import Upload from "../../Imagens/Upload.png";
 import AddImageEvent from "../../Imagens/AddImageEvent.png";
 import { useNavigate } from "react-router-dom";
 import iconTitle from "../../Imagens/iconTitle.png";
+
 const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);
   const [files, setFiles] = useState([]);
@@ -26,13 +26,9 @@ const PublicarEvento = () => {
   const navigate = useNavigate();
   const [previews, setPreviews] = useState([]);
   const inputFileRefs = useRef([]);
-
-  // console.log(title)
-  // console.log(startDate)
-  // console.log(hour)
-  // console.log(local)
-  // console.log(type)
-  // console.log(descricao)
+  const [videos, setVideos] = useState([]);
+  const videoInputRef = useRef(null);
+  const [videoPreviews, setVideoPreviews] = useState([]);
 
   const formatDate = (date) => {
     const formattedDate = new Date(date);
@@ -79,6 +75,9 @@ const PublicarEvento = () => {
       data.append("startDate", formatDate(startDate));
       files.forEach((file, index) => {
         data.append("src", file);
+      });
+      videos.forEach((videos, index) => {
+        data.append("video", videos);
       });
 
       const response = await api.post(url, data);
@@ -141,6 +140,57 @@ const PublicarEvento = () => {
       });
     },
   });
+
+  const {
+    getRootProps: getVideoRootProps,
+    getInputProps: getVideoInputProps,
+    isDragActive: isVideoDragActive,
+  } = useDropzone({
+    accept: "video/*",
+    multiple: true,
+    onDrop: (acceptedFiles) => {
+      const remainingSlots = 8 - videos.length;
+      const filesToBeAdded = acceptedFiles.slice(0, remainingSlots);
+      setVideos((prevVideos) => [...prevVideos, ...filesToBeAdded]);
+
+      const newVideoPreviews = [...videoPreviews];
+      acceptedFiles.slice(0, remainingSlots).forEach((video) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          newVideoPreviews.push(reader.result);
+          setVideoPreviews(newVideoPreviews);
+        };
+        reader.readAsDataURL(video);
+      });
+    },
+  });
+
+  const handleVideoChange = (event) => {
+    const selectedVideos = event.target.files;
+    setVideos((prevVideos) => [...prevVideos, ...selectedVideos]);
+
+    const newVideoPreviews = [...videoPreviews];
+    Array.from(selectedVideos).forEach((video) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        newVideoPreviews.push(reader.result);
+        setVideoPreviews(newVideoPreviews);
+      };
+      reader.readAsDataURL(video);
+    });
+  };
+  const removeVideo = (index) => {
+    setVideos((prevVideos) => {
+      const newVideos = [...prevVideos];
+      newVideos.splice(index, 1);
+      return newVideos;
+    });
+    setVideoPreviews((prevPreviews) => {
+      const newPreviews = [...prevPreviews];
+      newPreviews.splice(index, 1);
+      return newPreviews;
+    });
+  };
 
   return (
     <>
@@ -274,7 +324,7 @@ const PublicarEvento = () => {
                   {previews.map((preview, index) => (
                     <div key={index} className="file-item">
                       <img src={preview} alt={`Preview ${index}`} />
-                      <button onClick={() => removeFile(index)}>Remover</button>
+                      <button class="btn-event-remove" onClick={() => removeFile(index)}>Remover</button>
                     </div>
                   ))}
                   {files.length < 8 && (
@@ -282,7 +332,6 @@ const PublicarEvento = () => {
                       className="file-input-label"
                       onClick={() => handleFileSelect(files.length)}
                     >
-                      <span>+</span>
                       <input
                         ref={inputFileRefs.current[files.length]}
                         type="file"
@@ -293,6 +342,39 @@ const PublicarEvento = () => {
                     </label>
                   )}
                 </div>
+              </div>
+            </div>
+            <div>
+            <h5>Vídeos do Evento</h5>
+              <div
+                {...getVideoRootProps()}
+                className={`dropzone ${isVideoDragActive ? "active" : ""}`}
+              >
+                <input {...getVideoInputProps()} />
+                <p>Arraste e solte os vídeos aqui ou clique para selecionar.</p>
+              </div>
+              <div className="selected-files">
+                {videoPreviews.map((preview, index) => (
+                  <div key={index} className="file-item">
+                    <video className="vidInt" src={preview} controls />
+                    <button class="btn-event-remove" onClick={() => removeVideo(index)}>Remover</button>
+                  </div>
+                ))}
+                {videos.length < 8 && (
+                  <label
+                    className="file-input-label"
+                    onClick={handleVideoChange}
+                  >
+                    <input
+                      ref={videoInputRef}
+                      type="file"
+                      style={{ display: "none" }}
+                      name="video"
+                      accept="video/*"
+                      onChange={handleVideoChange}
+                    />
+                  </label>
+                )}
               </div>
             </div>
             <div className="upArq">

@@ -7,8 +7,15 @@ import "../Styles/StyleContents/EditarProfessor.css"
 import api from "../../services/api";
 import { UserContext } from "../useContext/UserContext";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function EditarProfessor(){
+  const [selectedProfessor, setSelectedProfessor] = useState(null);
+  console.log(selectedProfessor);
+
+  const handleProfessorSelect = (professorId) => {
+    setSelectedProfessor(professorId);
+  };
 
 
 
@@ -50,9 +57,12 @@ function EditarProfessor(){
           </div>
        </div>
        <div>
-        <TabelaEditProfessor/>
+        <TabelaEditProfessor onProfessorSelect={handleProfessorSelect}/>
         <div className="upArq">
-          <button>Editar Professor</button>
+          <a href={`EditarProfessor/${selectedProfessor}`}>
+              <button>Editar Professor</button>
+          </a>
+          
         </div>
        </div>
        

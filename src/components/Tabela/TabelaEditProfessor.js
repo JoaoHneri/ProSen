@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/TabelaDashboard.css";
+import api from "../../services/api";
+import { Link } from "react-router-dom";
 
 
 
-const TabelaEditProfessor = ({}) => {
+const TabelaEditProfessor = ({ onProfessorSelect }) => {
+  const [Professores, setProfessores] = useState([]);
+
+  async function getProfs(){
+    const profs = await api.get('/professores');
+    const {data} = profs;
+    setProfessores(data.users);
+  }
+
+  useEffect(()=>{
+    getProfs()
+  },[api])
+
   return (
     <div className="table-wrapper">
       <table>
@@ -16,18 +30,14 @@ const TabelaEditProfessor = ({}) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>956622554225</td>
-            <td>ERIK DO CARMO MARQUES</td>
-            <td>TECNOLOGIA DA INFORMAÇÃO</td>
+          {Professores.map((professores)=>(
+            <tr key={professores._id}>
+            <td><input type="radio" onChange={() => onProfessorSelect(professores._id)}/></td>
+            <td>{professores.record}</td>
+            <td>{professores.nameUser}</td>
+            <td>{professores.graduation}</td>
           </tr>
-          <tr>
-            <td><input type="radio"/></td>
-            <td>565655544554</td>
-            <td>INGRED BARRETO DE ALMEIDA PASSOS</td>
-            <td>ADMINISTRAÇÃO</td>
-          </tr>
+          ))}
         </tbody>
       </table>
     </div>

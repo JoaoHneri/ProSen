@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import imgForm from "../../Imagens/imageForm.png";
 import "../Styles/StyleContents/PublicarEvento.css";
-import FileVideo from "../Configs/InputVideo";
 import { useDropzone } from "react-dropzone";
 import "../Styles/InputFile.css";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -14,10 +13,9 @@ import { useNavigate } from "react-router-dom";
 import iconTitle from "../../Imagens/iconTitle.png";
 import { useParams } from "react-router-dom";
 import NavBar from "../Navbar/Navbar";
+import { Navbar } from "react-bootstrap";
 
-
-
-const EventEdit = () => {
+const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);
   const [files, setFiles] = useState([]);
   const [title, setTitle] = useState("");
@@ -31,30 +29,36 @@ const EventEdit = () => {
   const navigate = useNavigate();
   const [previews, setPreviews] = useState([]);
   const inputFileRefs = useRef([]);
-  const [States, setState] = useState("");
+  const [videos, setVideos] = useState([]);
+  const videoInputRef = useRef(null);
+  const [videoPreviews, setVideoPreviews] = useState([]);
+  const [infs, setInfs] = useState([]);
+
   const {id} = useParams();
 
-  async function getStates(){
+  async function getInfs(){
     try {
-      const states = await api.get(`/event/${id}`);
-      const {data} = states;
-      setState(data);
-      setTitle(data.title);
-      setStateDate(data.startDate);
-      setHour(data.hour);
+      const infs = await api.get(`event/${id}`);
+      const {data} = infs;
+      setTitle(data.title)
+      setStateDate(formatDate(data.startDate));
+      setHour(formatarHora(data.hour));
       setLocal(data.local);
       setType(data.type);
-      setDescricao(data.descricao);
-
+      setDescricao(data.descricao)
     } catch (error) {
-      console.log(error);
+      
     }
-  };
+  }
+
   useEffect(()=>{
-    getStates()
+    getInfs();
   },[api])
 
-  console.log(States)
+  function formatarHora(hora) {
+    const horaFormatada = hora.substring(0, 2) + ":" + hora.substring(2);
+    return horaFormatada;
+  }
 
   const formatDate = (date) => {
     const formattedDate = new Date(date);
@@ -99,6 +103,9 @@ const EventEdit = () => {
       data.append("startDate", formatDate(startDate));
       files.forEach((file, index) => {
         data.append("src", file);
+      });
+      videos.forEach((videos, index) => {
+        data.append("video", videos);
       });
 
       const response = await api.put(url, data);
@@ -162,9 +169,60 @@ const EventEdit = () => {
     },
   });
 
+  const {
+    getRootProps: getVideoRootProps,
+    getInputProps: getVideoInputProps,
+    isDragActive: isVideoDragActive,
+  } = useDropzone({
+    accept: "video/*",
+    multiple: true,
+    onDrop: (acceptedFiles) => {
+      const remainingSlots = 8 - videos.length;
+      const filesToBeAdded = acceptedFiles.slice(0, remainingSlots);
+      setVideos((prevVideos) => [...prevVideos, ...filesToBeAdded]);
+
+      const newVideoPreviews = [...videoPreviews];
+      acceptedFiles.slice(0, remainingSlots).forEach((video) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          newVideoPreviews.push(reader.result);
+          setVideoPreviews(newVideoPreviews);
+        };
+        reader.readAsDataURL(video);
+      });
+    },
+  });
+
+  const handleVideoChange = (event) => {
+    const selectedVideos = event.target.files;
+    setVideos((prevVideos) => [...prevVideos, ...selectedVideos]);
+
+    const newVideoPreviews = [...videoPreviews];
+    Array.from(selectedVideos).forEach((video) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        newVideoPreviews.push(reader.result);
+        setVideoPreviews(newVideoPreviews);
+      };
+      reader.readAsDataURL(video);
+    });
+  };
+  const removeVideo = (index) => {
+    setVideos((prevVideos) => {
+      const newVideos = [...prevVideos];
+      newVideos.splice(index, 1);
+      return newVideos;
+    });
+    setVideoPreviews((prevPreviews) => {
+      const newPreviews = [...prevPreviews];
+      newPreviews.splice(index, 1);
+      return newPreviews;
+    });
+  };
+
   return (
     <>
-    <NavBar/>
+    <Navbar/>
       <div>
         <form>
           <div id="color-bg">
@@ -295,7 +353,7 @@ const EventEdit = () => {
                   {previews.map((preview, index) => (
                     <div key={index} className="file-item">
                       <img src={preview} alt={`Preview ${index}`} />
-                      <button onClick={() => removeFile(index)}>Remover</button>
+                      <button class="btn-event-remove" onClick={() => removeFile(index)}>Remover</button>
                     </div>
                   ))}
                   {files.length < 8 && (
@@ -316,9 +374,43 @@ const EventEdit = () => {
                 </div>
               </div>
             </div>
+            <div>
+            <h5>Vídeos do Evento</h5>
+              <div
+                {...getVideoRootProps()}
+                className={`dropzone ${isVideoDragActive ? "active" : ""}`}
+              >
+                <input {...getVideoInputProps()} />
+                <p>Arraste e solte os vídeos aqui ou clique para selecionar.</p>
+              </div>
+              <div className="selected-files">
+                {videoPreviews.map((preview, index) => (
+                  <div key={index} className="file-item">
+                    <video className="vidInt" src={preview} controls />
+                    <button class="btn-event-remove" onClick={() => removeVideo(index)}>Remover</button>
+                  </div>
+                ))}
+                {videos.length < 8 && (
+                  <label
+                    className="file-input-label"
+                    onClick={handleVideoChange}
+                  >
+                    <span>+</span>
+                    <input
+                      ref={videoInputRef}
+                      type="file"
+                      style={{ display: "none" }}
+                      name="video"
+                      accept="video/*"
+                      onChange={handleVideoChange}
+                    />
+                  </label>
+                )}
+              </div>
+            </div>
             <div className="upArq">
               <button type="submit" onClick={handleSubmit}>
-                Publicar Evento
+                Atualizar Evento
               </button>
             </div>
           </div>
@@ -328,4 +420,4 @@ const EventEdit = () => {
   );
 };
 
-export default EventEdit;
+export default PublicarEvento;

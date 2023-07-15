@@ -88,16 +88,7 @@
 }
 
 .divVideos{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.divVideos{
-    padding: 10px;
-    border: none;
-    border-radius: 24px;
-    margin-bottom: 10px;
-
+    display: flex;
     
 }
 
@@ -116,6 +107,14 @@
 
 .finish{
     margin: 20px;
+}
+
+.vidInt{
+    width: 425px;
+    height: 300px;
+    border-radius: 8px;
+    margin: 10px;
+
 }
   
 @media (max-width: 768px) {
@@ -153,8 +152,14 @@
        flex-direction: column;
       
     }
-    .divVideos img{
-        width: 350px;
-        margin-bottom: 20px;
+
+    .vidInt{
+        width: 305px;
+        height: 200px;
+        border-radius: 8px;
+        margin: 10px;
+    
     }
+
+
 }

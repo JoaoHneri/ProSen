@@ -1,15 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import imgForm from "../../Imagens/imageForm.png";
-import "../Styles/StyleContents/PublicarProjeto.css";
-import api from "../../services/api";
-import { useContext } from "react";
-import { UserContext } from "../useContext/UserContext";
-import {FaUpload} from 'react-icons/fa'
-import Upload from '../../Imagens/Upload.png';
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import iconTitle from "../../Imagens/iconTitle.png"
+import Upload from '../../Imagens/Upload.png';
+import iconTitle from "../../Imagens/iconTitle.png";
+import api from "../../services/api";
+import "../Styles/StyleContents/PublicarProjeto.css";
+import { UserContext } from "../useContext/UserContext";
 const CadastrarProfessor = () => {
-  const [name, setName] = useState("");
+  const [nameUser, setName] = useState("");
   const [record, setRecord] = useState("");
   const [graduation, setGraduation] = useState("");
   const [LevelofEducation, setLevelofEducation] = useState("")
@@ -20,6 +17,7 @@ const CadastrarProfessor = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [file, setFile] = useState(null);
   const [authAdmin, setAuthAdmin] = useState(false);
+  const [authStudent, setAuthStudent] = useState(true);
   const navigate = useNavigate();
   const [userData, setUserData] = useContext(UserContext);
 
@@ -29,7 +27,7 @@ const CadastrarProfessor = () => {
     try {
       // Crie um objeto FormData para enviar os dados e o arquivo
       const formData = new FormData();
-      formData.append("name", name);
+      formData.append("nameUser", nameUser);
       formData.append("record", record);
       formData.append("graduation", graduation);
       formData.append("LevelofEducation", LevelofEducation);
@@ -38,6 +36,7 @@ const CadastrarProfessor = () => {
       formData.append("telephone", telephone);
       formData.append("confirmPassword", confirmPassword);
       formData.append("authAdmin", authAdmin);
+      formData.append("authStudent", authStudent);
       formData.append("office", office);
       formData.append("file", file);
 
@@ -80,9 +79,9 @@ const CadastrarProfessor = () => {
                   <label className="edit-label">Nome:</label>
                   <input
                     type="text"
-                    name="name"
+                    name="nameUser"
                     className="input"
-                    value={name}
+                    value={nameUser}
                     onChange={(event) => setName(event.target.value)}
                   />
                 </div>

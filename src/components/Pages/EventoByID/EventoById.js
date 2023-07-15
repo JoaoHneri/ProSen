@@ -109,36 +109,17 @@ const EventoById = () => {
         </div>
         <div className="divFotos">
           <div>
-            <img
-              className="imageToPost"
-              src={
-                Event
-                  ? `${process.env.REACT_APP_API}temp/uploads/${Event.src[0].key}`
-                  : "carregando"
-              }
-              alt="Foto do evento"
-            />
-          </div>
-          <div>
-            <img src={Foto1} alt="Foto do evento" />
-          </div>
-          <div>
-            <img src={Evento3} alt="Foto do evento" />
-          </div>
-          <div>
-            <img src={Evento4} alt="Foto do evento" />
-          </div>
-          <div>
-            <img src={Evento5} alt="Foto do evento" />
-          </div>
-          <div>
-            <img src={Evento6} alt="Foto do evento" />
-          </div>
-          <div>
-            <img src={Evento7} alt="Foto do evento" />
-          </div>
-          <div>
-            <img src={evento8} alt="Foto do evento" />
+            {
+              Event ?
+              Event.src.map((event) =>(
+                <img className="imageToPost" src={`${process.env.REACT_APP_API}temp/uploads/${event.key}`} alt="Fotos do Evento"/>
+              ))
+              : "Carregando"
+            
+            }
+
+
+           
           </div>
         </div>
       </div>

@@ -185,7 +185,7 @@ const PublicarProjeto = () => {
                       Evento.map((events) => (
                         <option value={events.id}>{events.title}</option>
                       )) :
-                      <option value='Sem Eventos Postados no momento'>Ainda não Existe Eventos Postados</option>
+                      <option value='Sem Eventos Postados no momento'>Ainda não Existe Eventos Postados (Selecione essa Opção)</option>
                     }
                   </select>
                 </div>

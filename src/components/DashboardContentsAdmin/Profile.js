@@ -29,7 +29,7 @@ function Profile() {
       <div className="content-action">
         <div className="content-avatar">
           <div class="avatar">
-            <img src={imgEquipe2} alt="Descrição da imagem" />
+            <img src={`${process.env.REACT_APP_API}`} alt="Imagem do Usuário" />
           </div>
         </div>
         <div className="content-dados">

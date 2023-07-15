@@ -31,6 +31,7 @@ function Login() {
       const nomeUser = JSON.stringify(Data.data.usuario.nameUser).replace(/["]/g, "");
       const emailProsen = JSON.stringify(Data.data.usuario.email).replace(/["]/g, "");
       const authAdmin = JSON.stringify(Data.data.usuario.authAdmin).replace(/["]/g, "");
+      const authStudent = JSON.stringify(Data.data.usuario.authStudent).replace(/["]/g, "");
 
       localStorage.setItem("token_Prosen", tokenGuard);
       localStorage.setItem("id_Prosen", id);
@@ -38,6 +39,7 @@ function Login() {
       localStorage.setItem("email_Prosen", emailProsen);
       localStorage.setItem("logado_Prosen", true);
       localStorage.setItem("authAdmin_Prosen", authAdmin);
+      localStorage.setItem("authStudent_Prosen", authStudent);
       await navigate("/");
       window.location.reload(true);
     }catch{

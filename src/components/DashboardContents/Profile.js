@@ -3,38 +3,37 @@ import { BiEdit } from "react-icons/bi";
 import api from "../../services/api";
 import "../Styles/StyleContents/Profile.css";
 import { UserContext } from "../useContext/UserContext";
+import { Link } from "react-router-dom";
 
 function Profile() {
   const [userData, setUserData] = useContext(UserContext);
   const [user, setUser] = useState([]);
   const [project, setProject] = useState([]);
 
-  async function init(){
+  async function init() {
     try {
       const user = await api.get(`/user/${userData.id}`);
-      const {data} = user;
+      const { data } = user;
       setUser(data);
-
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function getUserProjects(){
+  async function getUserProjects() {
     try {
       const project = await api.get(`/project/${userData.id}`);
-      const {data} = project;
-      setProject(data.projects)
-
+      const { data } = project;
+      setProject(data.projects);
     } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(()=>{
-    init()
+  useEffect(() => {
+    init();
     getUserProjects();
-  },[api])
+  }, [api]);
 
   function formatarDataBrasileira(data) {
     const dateObj = new Date(data);
@@ -51,22 +50,32 @@ function Profile() {
       <div className="content-action">
         <div className="content-avatar">
           <div class="avatar">
-            <img src={`${process.env.REACT_APP_API}/temp/uploads/${user.file}`} alt="Descrição da imagem" />
+            {user && user.file && user.file.key ? (
+              <img
+                src={`${process.env.REACT_APP_API}temp/uploads/${user.file.key}`}
+                alt="Descrição da imagem"
+              />
+            ) : (
+              "carregando"
+            )}
           </div>
         </div>
         <div className="content-dados">
           <div>
             <p>
-              <span id="title-span">Nome: </span>{user.nameUser}{" "}
+              <span id="title-span">Nome: </span>
+              {user.nameUser}{" "}
             </p>
             <p>
-              <span id="title-span">Cargo: </span>{user.office}
+              <span id="title-span">Cargo: </span>
+              {user.office}
             </p>
             <p>
               <span id="title-span">Email: </span> {user.email}
             </p>
             <p>
-              <span id="title-span">Telefone: </span>{user.telephone}
+              <span id="title-span">Telefone: </span>
+              {user.telephone}
             </p>
           </div>
         </div>
@@ -76,13 +85,15 @@ function Profile() {
           <div className="title-profile">
             <h4>Atividade Recente</h4>
           </div>
-          {project.map((project)=>(
+          {project.map((project) => (
             <div className="profile-itens">
-            <p>{formatarDataBrasileira(project.date)}</p>
-            <p>{project.type}</p>
-            <p>{project.linkEvent}</p>
-            <BiEdit id="icon-profile" />
-          </div>
+              <p>{formatarDataBrasileira(project.date)}</p>
+              <p>{project.type}</p>
+              <p>{project.linkEvent}</p>
+              <a href={`EditarProjeto/${project._id}`}>
+                <BiEdit id="icon-profile" />
+              </a>
+            </div>
           ))}
         </div>
       </div>

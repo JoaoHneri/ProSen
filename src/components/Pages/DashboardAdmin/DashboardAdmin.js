@@ -4,7 +4,7 @@ import { BiExit, BiMenu } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import "../../Styles/Dashboard.css";
-import Profile from "../../DashboardContentsAdmin/Profile";
+import Profile from "../../DashboardContents/Profile";
 import PublicarEvento from "../../DashboardContents/PublicarEvento";
 import CadastrarProfessor from"../../DashboardContentsAdmin/CadastrarProfessor"
 import EditarProfessor from"../../DashboardContentsAdmin/EditarProfessor"

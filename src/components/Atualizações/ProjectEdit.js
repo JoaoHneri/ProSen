@@ -8,6 +8,8 @@ import {FaUpload} from 'react-icons/fa'
 import Upload from '../../Imagens/Upload.png';
 import { useNavigate, useParams } from "react-router-dom";
 import iconTitle from "../../Imagens/iconTitle.png"
+import NavBar from "../Navbar/Navbar";
+
 const EditProject = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [userData, setUserData] = useContext(UserContext);
@@ -83,8 +85,36 @@ const EditProject = () => {
     getEvents();
   }, []);
 
+
+  async function getForms(){
+    try {
+      const forms = await api.get(`/project/this/${id}`);
+      const {data} = forms;
+      setTitle(data.title);
+      setArea(data.area);
+      setShift(data.shift);
+      setType(data.type);
+      const formattedDate = new Date(data.date);
+      const formattedDateString = formattedDate.toISOString().split('T')[0];
+      setDate(formattedDateString);
+      setLinkEvent(data.linkEvent);
+      setSupervisor(data.supervisor);
+      setGroupLeaderEmail(data.groupLeaderEmail);
+      setAuthors(data.authors);
+      setClassproject(data.classProject);
+
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(()=>{
+    getForms();
+  },[api])
+
   return (
     <>
+    <NavBar/>
       <div>
         <form onSubmit={handleSubmit}>
           <div id="color-bg">

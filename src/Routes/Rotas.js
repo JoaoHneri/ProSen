@@ -16,6 +16,9 @@ import { Home } from "../components/Pages/Home/Home";
 import Login from "../components/Pages/Login/Login";
 import Respositorios from "../components/Pages/Respositorios/Respositorios";
 import { UserContext } from "../components/useContext/UserContext";
+import EditProject from "../components/Atualizações/ProjectEdit";
+import EventEdit from "../components/Atualizações/EventEdit";
+import EditarEvento from "../components/DashboardContents/EditarEvento";
 
 function ToTop() {
   const { pathname } = useLocation();
@@ -45,23 +48,24 @@ const Rotas = () => {
         <Route exact path="/login" Component={Login} />
 
         <Route
-        path="/Dashboard"
-        element={
-          userData.logado ? (
-            userData.authAdmin === "true" ? (
-              <DashboardAdmin />
-            ) : userData.authStudent  === "true" ? (
-              <DashboardAluno />
-            ) : (
-              <Dashboard />
-            )
-          ) : (
-            <Login />
-          )
-        }
-      />
+  path="/Dashboard"
+  element={
+    userData.logado ? (
+      userData.authAdmin === "true" && userData.authStudent === "false" ? (
+        <DashboardAdmin />
+      ) : userData.authAdmin === "false" && userData.authStudent === "true" ? (
+        <DashboardAluno />
+      ) : (
+        <Dashboard />
+      )
+    ) : (
+      <Login />
+    )
+  }
+/>
 
-
+      <Route exact path="/EditarProjeto/:id" Component={EditProject} />
+      <Route exact path="/EditarEvento/:id" Component={EventEdit} />
 
         <Route path="/CadastrarProfessor" element={userData.logado ? <CadastrarProfessor/> : <Login/>}/>
       </Routes>

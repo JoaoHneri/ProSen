@@ -17,7 +17,7 @@ const CadastrarProfessor = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [file, setFile] = useState(null);
   const [authAdmin, setAuthAdmin] = useState(false);
-  const [authStudent, setAuthStudent] = useState(true);
+  const [authStudent, setAuthStudent] = useState(false);
   const navigate = useNavigate();
   const [userData, setUserData] = useContext(UserContext);
 

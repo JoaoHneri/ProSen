@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import NavBar from "../../Navbar/Navbar";
-import "../../Styles/Login.css";
-import BannerLogin from "../../Section-Banner/BannerLogin";
-import imglogologin from "../../../Imagens/logo-login.png";
+import React, { useContext, useState } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import logoForm from "../../../Imagens/logo-form.png";
-import { Link, useNavigate } from "react-router-dom";
+import imglogologin from "../../../Imagens/logo-login.png";
 import api from "../../../services/api";
-import { useContext } from "react";
+import NavBar from "../../Navbar/Navbar";
+import BannerLogin from "../../Section-Banner/BannerLogin";
+import "../../Styles/Login.css";
 import { UserContext } from "../../useContext/UserContext";
 
 function Login() {
@@ -29,13 +28,13 @@ function Login() {
       console.log(Data.data);
       const tokenGuard = JSON.stringify(Data.data.token).replace(/["]/g, "");
       const id = JSON.stringify(Data.data.usuario._id).replace(/["]/g, "");
-      const nome = JSON.stringify(Data.data.usuario.name).replace(/["]/g, "");
+      const nomeUser = JSON.stringify(Data.data.usuario.nameUser).replace(/["]/g, "");
       const emailProsen = JSON.stringify(Data.data.usuario.email).replace(/["]/g, "");
       const authAdmin = JSON.stringify(Data.data.usuario.authAdmin).replace(/["]/g, "");
 
       localStorage.setItem("token_Prosen", tokenGuard);
       localStorage.setItem("id_Prosen", id);
-      localStorage.setItem("name_Prosen", nome);
+      localStorage.setItem("name_Prosen", nomeUser);
       localStorage.setItem("email_Prosen", emailProsen);
       localStorage.setItem("logado_Prosen", true);
       localStorage.setItem("authAdmin_Prosen", authAdmin);

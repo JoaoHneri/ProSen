@@ -1,12 +1,11 @@
-import Container from "react-bootstrap/Container";
-import logo from "../../Imagens/logo-nav.png";
-import { Navbar, Nav } from "react-bootstrap";
-import { FaUserAlt } from "react-icons/fa";
-import "../Styles/NavBar.css";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import { FaUserAlt } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../../Imagens/logo-nav.png";
+import "../Styles/NavBar.css";
 import { UserContext } from "../useContext/UserContext";
-import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const [userData, setUserData] = useContext(UserContext);
@@ -40,7 +39,7 @@ function NavBar() {
               {userData.logado ? (
                 <Link to={"/dashboard"}>
                   <Nav.Link id="link-nav" href="#link">
-                    Bem vindo {userData.name}
+                    Bem vindo {userData.nameUser}
                   </Nav.Link>
                 </Link>
               ) : (

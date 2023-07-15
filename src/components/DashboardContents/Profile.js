@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import imgEquipe2 from "../../Imagens/foto1.jpg";
-import "../Styles/StyleContents/Profile.css";
+import React, { useContext, useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import api from "../../services/api";
+import "../Styles/StyleContents/Profile.css";
 import { UserContext } from "../useContext/UserContext";
-import { useContext } from "react";
 
 function Profile() {
   const [userData, setUserData] = useContext(UserContext);
@@ -27,6 +25,7 @@ function Profile() {
       const project = await api.get(`/project/${userData.id}`);
       const {data} = project;
       setProject(data.projects)
+
     } catch (error) {
       console.log(error);
     }
@@ -52,22 +51,22 @@ function Profile() {
       <div className="content-action">
         <div className="content-avatar">
           <div class="avatar">
-            <img src={imgEquipe2} alt="Descrição da imagem" />
+            <img src={`${process.env.REACT_APP_API}/temp/uploads/${user.file}`} alt="Descrição da imagem" />
           </div>
         </div>
         <div className="content-dados">
           <div>
             <p>
-              <span id="title-span">Nome: </span>{user.name}{" "}
+              <span id="title-span">Nome: </span>{user.nameUser}{" "}
             </p>
             <p>
-              <span id="title-span">Cargo: </span>{user.cargo}
+              <span id="title-span">Cargo: </span>{user.office}
             </p>
             <p>
               <span id="title-span">Email: </span> {user.email}
             </p>
             <p>
-              <span id="title-span">Telefone: </span>{user.telefone}
+              <span id="title-span">Telefone: </span>{user.telephone}
             </p>
           </div>
         </div>

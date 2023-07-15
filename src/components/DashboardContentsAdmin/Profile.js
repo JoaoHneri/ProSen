@@ -1,9 +1,29 @@
-import React from "react";
-import imgEquipe2 from "../../Imagens/Imagens Equipe/welber 1.png";
-import "../Styles/StyleContents/Profile.css";
+import React, { useContext, useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
-import iconTitle from "../../Imagens/iconTitle.png"
+import imgEquipe2 from "../../Imagens/Imagens Equipe/welber 1.png";
+import iconTitle from "../../Imagens/iconTitle.png";
+import api from "../../services/api";
+import "../Styles/StyleContents/Profile.css";
+import { UserContext } from "../useContext/UserContext";
 function Profile() {
+  const [userData, setUserData] = useContext(UserContext);
+  const [user, setUser] = useState([]);
+  async function init(){
+
+    try {
+      const user = await api.get(`/user/${userData.id}`);
+      const {data} = user;
+      setUser(data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+   
+  useEffect(()=>{
+    init()
+
+  },[api])
   return (
     <>
       <div className="content-action">

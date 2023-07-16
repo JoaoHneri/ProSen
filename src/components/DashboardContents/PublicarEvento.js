@@ -1,16 +1,12 @@
-import React, { useRef, useState } from "react";
-import imgForm from "../../Imagens/imageForm.png";
-import "../Styles/StyleContents/PublicarEvento.css";
+import React, { useContext, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import "../Styles/InputFile.css";
-import { AiOutlinePlus } from "react-icons/ai";
-import api from "../../services/api";
-import { useContext } from "react";
-import { UserContext } from "../useContext/UserContext";
-import Upload from "../../Imagens/Upload.png";
-import AddImageEvent from "../../Imagens/AddImageEvent.png";
 import { useNavigate } from "react-router-dom";
+import Upload from "../../Imagens/Upload.png";
 import iconTitle from "../../Imagens/iconTitle.png";
+import api from "../../services/api";
+import "../Styles/InputFile.css";
+import "../Styles/StyleContents/PublicarEvento.css";
+import { UserContext } from "../useContext/UserContext";
 
 const PublicarEvento = () => {
   const [userData, setUserData] = useContext(UserContext);

@@ -1,11 +1,11 @@
 import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import {  BsTelephone} from 'react-icons/bs';   
-import { FiMapPin, FiPhone,  } from 'react-icons/fi';
-import {BiTimeFive} from 'react-icons/bi';
-import {AiFillLinkedin} from 'react-icons/ai';
-import logoFooter from "../../Imagens/logo-footer.png"
-import loc from "../../Imagens/localização-senai.png"
+import { AiFillLinkedin } from 'react-icons/ai';
+import { BiTimeFive } from 'react-icons/bi';
+import { BsTelephone } from 'react-icons/bs';
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FiMapPin } from 'react-icons/fi';
+import loc from "../../Imagens/localização-senai.png";
+import logoFooter from "../../Imagens/logo-footer.png";
 import '../Styles/Footer.css';
 function Footer(){
     return(
@@ -24,15 +24,18 @@ function Footer(){
             <div className="footer-column">
               <h5 className="footer-heading">O ProSen</h5>
               <ul className="info-list">
-                <li><a href="#">Sobre o ProSen</a></li>
-                <li><a href="#">Unidade Senai Feira de Santana</a></li>
-                <li><a href="#">Repositório</a></li>
+               
+                <li><a href="#SobreProSen">Sobre o ProSen</a></li>
+                <li><a href="#Sobre">Unidade Senai Feira de Santana</a></li>
+
+                <li><a href="#Repositorio">Repositório</a></li>
+     
               </ul>
               <h5 className="footer-heading">Faça parte do Senai</h5>
               <ul className="info-list">
-                <li><a href="#">Cursos</a></li>
-                <li><a href="#">Matrícula</a></li>
-                <li><a href="#">Site Senai</a></li>
+                <li><a href="https://www.tecnicosenai.com.br/cursos/">Cursos</a></li>
+                <li><a href="https://www.tecnicosenai.com.br/matriculas-mensalidades/">Matrícula</a></li>
+                <li><a href="https://www.portaldaindustria.com.br/senai/">Site Senai</a></li>
               </ul>
             </div>
             <div className="row">

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { BiTimeFive } from "react-icons/bi";
+import { HiLocationMarker } from "react-icons/hi";
+import { Link } from "react-router-dom";
+import Vector from "../../../Imagens/Vector.png";
+import Devs from '../../../Imagens/devs.png';
+import imgInstituicao from "../../../Imagens/imagem-instituicao.png";
+import prosen from "../../../Imagens/prosen.png";
+import api from "../../../services/api";
+import CardEvent from "../../CardEvent/CardEvent";
+import CardCarousel from "../../Carousel/Carousel";
+import Footer from "../../Footer/Footer";
 import NavBar from "../../Navbar/Navbar";
 import SectionBanner1 from "../../Section-Banner/Banner";
-import prosen from "../../../Imagens/prosen.png";
-import imgInstituicao from "../../../Imagens/imagem-instituicao.png";
 import "../../Styles/Home.css";
-import { HiLocationMarker } from "react-icons/hi";
-import { BiTimeFive } from "react-icons/bi";
-import CardCarousel from "../../Carousel/Carousel";
-import Vector from "../../../Imagens/Vector.png";
-import CardEvent from "../../CardEvent/CardEvent";
-import Devs from '../../../Imagens/devs.png';
-import Footer from "../../Footer/Footer";
-import { Link } from "react-router-dom";
-import api from "../../../services/api";
 
 export const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -39,13 +39,13 @@ export const Home = () => {
       <SectionBanner1 />
       <div className="content-container">
         <div className="tx-cont container Section_Prosen">
-          <h1>A Instituição</h1>
+          <h1 id='Sobre'>A Instituição </h1>
         </div>
         <section id="section">
           <div className="text-column">
             
             <div className="container edit-text">
-              
+              <div className="container">
               <h2 className="section-heading">SENAI Feira de Santana</h2>
               <p id="par-tx-edit">
                 O Senai Feira de Santana tem como diferencial o uso de
@@ -76,6 +76,8 @@ export const Home = () => {
                 <button className="btn-edit-loc">SAIBA MAIS</button>
                 </a>
               </div>
+              </div>
+              
             </div>
           </div>
           <div className="image-container">
@@ -93,7 +95,7 @@ export const Home = () => {
       <div>
         <div className="container">
           <div className="Section_Prosen">
-            <h1>A plataforma</h1>
+            <h1 id="SobreProSen">A plataforma</h1>
             <div className="ContainerBox">
               <img className="img-fluid" src={prosen} alt="ProSen Senai" />
               <div>
@@ -123,7 +125,7 @@ export const Home = () => {
           </div>
         </div>
         <div className="BoxRepositories no-margin" id="Repositorio">
-          <p>Conheça o Repositório de Projetos SENAI Feira de Santana</p>
+          <p>Conheça o Repositório de Projetos SENAI<br/> Feira de Santana</p>
           <Link to={'/repositorios'}>
           <button>
             CLIQUE AQUI <img src={Vector} alt="Clique Aqui" />
@@ -138,11 +140,14 @@ export const Home = () => {
         </div>
       </div>
       <div className="container-fluid edit-cont-cards">
+
         {
-          eventos.map((events)=>(
+          eventos.map((events)=>( 
             <div className="divEvent"><CardEvent id={events._id} title={events.title} local={events.local} startDate={events.startDate}/></div>
           ) )
         }
+        
+
         
 
       </div>

@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import { Link, useParams } from "react-router-dom";
+import Vector from "../../../Imagens/Vector.png";
+import baseUser from "../../../Imagens/baseUser.png";
+import DateIcon from "../../../Imagens/date.png";
+import Location from "../../../Imagens/location.png";
+import Search from "../../../Imagens/search.png";
+import Time from "../../../Imagens/time.png";
+import User from "../../../Imagens/user.png";
+import userHead from "../../../Imagens/usserHead.png";
+import api from "../../../services/api";
+import Footer from "../../Footer/Footer";
 import NavBar from "../../Navbar/Navbar";
 import Banner4 from "../../Section-Banner/Banner4";
 import "../../Styles/EventoByID.css";
-import DateIcon from "../../../Imagens/date.png";
-import Time from "../../../Imagens/time.png";
-import Location from "../../../Imagens/location.png";
-import baseUser from "../../../Imagens/baseUser.png";
-import User from "../../../Imagens/user.png";
-import userHead from "../../../Imagens/usserHead.png";
-import Vector from "../../../Imagens/Vector.png";
-import Foto1 from "../../../Imagens/Imagens do Evento/MostraSENAI (1) (4).png";
-import ImageVideo from "../../../Imagens/Imagens do Evento/Image Video.png";
-import Search from "../../../Imagens/search.png";
-import Dropdown from "react-bootstrap/Dropdown";
 import Tabela from "../../Tabela/Tabela";
-import { Link } from "react-router-dom";
-import Footer from "../../Footer/Footer";
-import Evento2 from "../../../Imagens/evento2.png";
-import Evento3 from "../../../Imagens/evento3.png";
-import Evento4 from "../../../Imagens/evento4.png";
-import Evento5 from "../../../Imagens/evento5.png";
-import Evento6 from "../../../Imagens/evento6.png";
-import Evento7 from "../../../Imagens/evento7.png";
-import evento8 from "../../../Imagens/evento8.png";
-import video2 from "../../../Imagens/video2.png";
-import video3 from "../../../Imagens/video3.png";
-import { useParams } from "react-router-dom";
-import api from "../../../services/api";
 
 const EventoById = () => {
   const [Event, setEvent] = useState();
@@ -77,7 +65,7 @@ const EventoById = () => {
         <div className="details">
           <p>
             <img src={DateIcon} alt="Data do Evento" className="m-1" />
-            {Event ? formatarDataBrasileira(Event.startDate) : "Carregando"}
+            25/05/2023
           </p>
 
           <p>

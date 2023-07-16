@@ -1,13 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import imgForm from "../../Imagens/imageForm.png";
-import "../Styles/StyleContents/PublicarProjeto.css";
-import api from "../../services/api";
-import { useContext } from "react";
-import { UserContext } from "../useContext/UserContext";
-import {FaUpload} from 'react-icons/fa'
-import Upload from '../../Imagens/Upload.png';
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import iconTitle from "../../Imagens/iconTitle.png"
+import Upload from '../../Imagens/Upload.png';
+import iconTitle from "../../Imagens/iconTitle.png";
+import api from "../../services/api";
+import "../Styles/StyleContents/PublicarProjeto.css";
+import { UserContext } from "../useContext/UserContext";
 const PublicarProjeto = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [userData, setUserData] = useContext(UserContext);
@@ -215,18 +212,16 @@ const PublicarProjeto = () => {
                 </div>
                 <div>
                   <label className="edit-label">Autores</label>
-                  <select
+                  <input
+                    type="text"
                     name="authors"
                     className="input"
                     value={authors}
                     onChange={(e) => {
                       setAuthors(e.target.value);
                     }}
-                  >
-                    <option value="aluno1">aluno1</option>
-                    <option value="aluno2">aluno2</option>
-                    <option value="aluno3">aluno3</option>
-                  </select>
+                  />
+            
                 </div>
               </div>
               <div className="img-form-input">

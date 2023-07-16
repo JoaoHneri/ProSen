@@ -1,19 +1,19 @@
 import React from "react";
-import NavBar from "../../Navbar/Navbar";
-import Footer from "../../Footer/Footer";
-import SectionBanner2 from "../../Section-Banner/Banner2";
-import { AiOutlineMail, AiFillLinkedin } from "react-icons/ai";
-import imgEquipe1 from "../../../Imagens/foto-erick.png";
-import imgEquipe2 from "../../../Imagens/foto-ingrid.png";
+import { AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
 import imgEquipe3 from "../../../Imagens/Imagens Equipe/edfran.png";
+import imgEquipe9 from "../../../Imagens/Imagens Equipe/jean.jpg";
+import imgEquipe10 from "../../../Imagens/Imagens Equipe/joao.jpeg";
+import imgEquipe8 from "../../../Imagens/Imagens Equipe/silas.jpeg";
 import imgEquipe4 from "../../../Imagens/Imagens Equipe/tatiane.png";
 import imgEquipe5 from "../../../Imagens/Imagens Equipe/veronia.png";
 import imgEquipe6 from "../../../Imagens/Imagens Equipe/victor.png";
 import imgEquipe7 from "../../../Imagens/Imagens Equipe/vinicius.png";
-import imgEquipe8 from "../../../Imagens/Imagens Equipe/silas.jpeg";
-import imgEquipe9 from "../../../Imagens/Imagens Equipe/jean.jpg";
-import imgEquipe10 from "../../../Imagens/Imagens Equipe/joao.jpeg";
-import Welber from "../../../Imagens/Imagens Equipe/welber 1.png"
+import Welber from "../../../Imagens/Imagens Equipe/welber2.jpeg";
+import imgEquipe1 from "../../../Imagens/foto-erick.png";
+import imgEquipe2 from "../../../Imagens/foto-ingrid.png";
+import Footer from "../../Footer/Footer";
+import NavBar from "../../Navbar/Navbar";
+import SectionBanner2 from "../../Section-Banner/Banner2";
 import "../../Styles/Equipe.css";
 
 function Equipe() {
@@ -269,14 +269,12 @@ function Equipe() {
           <div class="container edit1">
             <h4 id="edit-tx-h4">João Henrique Neri de Sousa</h4>
             <p id="edit-tx">
-              Estudante de Desenvolvimento de Sistemas no Senai e em paralelo
-              cursando o Superior em Bacharelado <br />
-              em Sistemas de Informação no IFBA- Instituto Federal da Bahia. Com
-              interesse na área de desenvolvimento <br />
-              de sistemas, e acredito que a área de desenvolvimento de softwares
-              é uma área muito interessante e em constante mudança. Sempre muito
+              Estudante do curso Bacharelado 
+              em Sistemas de Informação no IFBA - Instituto Federal da Bahia, já tendo completado o curso de Desenvolvimento de Sistemas no Senai Bahia.<br/>
+              Com grande interesse na área de desenvolvimento 
+              de softwares e sistemas, acumula experiência em JavaScript, utilizando frameworks para desenvolvimento como: React.js, Node.js, e também com bancos relacionais e não relacionais como MySQL e MongoDB. Sempre muito
               interessado em aprender mais sobre a profissão de desenvolvedor de
-              software.
+              software, se encontra em constante Evolução.
             </p>
             <div id="icons-divs">
               <AiOutlineMail id="icons-equipe" />
@@ -293,14 +291,7 @@ function Equipe() {
           <div class="container edit1-v2">
             <h4 id="edit-tx-h4-v2">Jean da Silva Freitas</h4>
             <p id="edit-tx-v2">
-              Um estudante promissor no campo do desenvolvimento de sistemas.
-              Movido pela curiosidade e pelo desejo de criar soluções inovadoras
-              para desafios complexos. Entusiasta do back-end, possui um
-              profundo conhecimento das linguagens de programação e estruturas
-              relacionadas ao desenvolvimento de sistemas. Dominio de
-              habilidades em linguagens como Java, JavaScript e PHP, além de
-              estar sempre atualizado com as mais recentes tendências e
-              tecnologias nesse campo em constante evolução.
+            Sou um estudante promissor no campo do desenvolvimento de sistemas, focado no back-end e com profundo conhecimento em linguagens como Java, JavaScript e PHP. Busco constantemente aprimorar minhas habilidades e me manter atualizado com as últimas tendências tecnológicas. Com formação técnica pelo Senai e atualmente cursando Análise e Desenvolvimento de Sistemas, busco uma carreira desafiadora e gratificante, aplicando meu conhecimento para criar soluções inovadoras e eficientes para desafios complexos no universo da tecnologia.
             </p>
             <div id="icons-divs-2">
               <AiOutlineMail id="icons-equipe" />

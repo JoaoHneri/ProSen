@@ -5,6 +5,9 @@ import {
   Routes,
   useLocation
 } from "react-router-dom";
+import EventEdit from "../components/Atualizações/EventEdit";
+import ProfessoresEdit from "../components/Atualizações/ProfessoresEdit";
+import EditProject from "../components/Atualizações/ProjectEdit";
 import CadastrarProfessor from "../components/DashboardContentsAdmin/CadastrarProfessor";
 import Dashboard from "../components/Pages/Dashboard/Dashboard";
 import DashboardAdmin from "../components/Pages/DashboardAdmin/DashboardAdmin";
@@ -16,10 +19,6 @@ import { Home } from "../components/Pages/Home/Home";
 import Login from "../components/Pages/Login/Login";
 import Respositorios from "../components/Pages/Respositorios/Respositorios";
 import { UserContext } from "../components/useContext/UserContext";
-import EditProject from "../components/Atualizações/ProjectEdit";
-import EventEdit from "../components/Atualizações/EventEdit";
-import EditarEvento from "../components/DashboardContents/EditarEvento";
-import ProfessoresEdit from "../components/Atualizações/ProfessoresEdit";
 
 function ToTop() {
   const { pathname } = useLocation();

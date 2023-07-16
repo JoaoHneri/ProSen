@@ -34,9 +34,14 @@
   height: 100%;
   z-index: 1;
 }
+.circullo-edicao{
+  color: #F7971D;
+  width: 10px;
+  height: 10px;
+}
 #circle-edit{
   color: #F7971D;
-  font-size: 12pt;
+  font-size: 19pt;
 
 }
 .hero-section .hero-content h1 {

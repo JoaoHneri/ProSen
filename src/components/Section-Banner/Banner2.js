@@ -1,6 +1,5 @@
 import React from "react";
-import "../Styles/Banner2.css"; 
-import {FaCircle} from"react-icons/fa"
+import "../Styles/Banner2.css";
 const SectionBanner2 = () => {
   return (
     
@@ -8,7 +7,7 @@ const SectionBanner2 = () => {
        <section className="bannerEquipe">
         <div className="hero-content container">
           <h1>Conheça a equipe 
-            <br/>por trás do ProSen<span id="circle-edit">.</span></h1>
+            <br/>por trás do ProSen<span className="circullo-edicao">.</span></h1>
         
         </div>
       </section>

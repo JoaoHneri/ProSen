@@ -153,9 +153,9 @@ const EventoById = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Palavras-Chaves</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Orientador</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Autores</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>

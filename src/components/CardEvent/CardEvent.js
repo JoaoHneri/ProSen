@@ -60,9 +60,9 @@ function CardEvent({ id, title, local, startDate }) {
               <HiLocationMarker id="icon-cards" /> <p>Senai</p>
             </div>
             <div className="Card-div-6">
-              <Link to={`/eventos/${id}`}>
+
                 <button className="btn-cards">SABER MAIS</button>
-              </Link>
+
             </div>
           </div>
         </div>
@@ -84,9 +84,9 @@ function CardEvent({ id, title, local, startDate }) {
               <HiLocationMarker id="icon-cards" /> <p>Senai</p>
             </div>
             <div className="Card-div-6">
-              <Link to={`/eventos/${id}`}>
+
                 <button className="btn-cards">SABER MAIS</button>
-              </Link>
+
             </div>
           </div>
         </div>
@@ -108,9 +108,9 @@ function CardEvent({ id, title, local, startDate }) {
               <HiLocationMarker id="icon-cards" /> <p>Senai</p>
             </div>
             <div className="Card-div-6">
-              <Link to={`/eventos/${id}`}>
+
                 <button className="btn-cards">SABER MAIS</button>
-              </Link>
+
             </div>
           </div>
         </div>

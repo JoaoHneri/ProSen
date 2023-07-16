@@ -71,7 +71,9 @@ function Footer(){
             <div className="footer-column">
               <h5 className="footer-heading">Senai Feira de Santana</h5>
               <ul className="location-info">
+              <a target='blank' href='https://www.google.com.br/maps/place/SENAI+Feira+de+Santana/@-12.2338121,-38.9694048,16z/data=!4m6!3m5!1s0x71438165404b7db:0x82474a6ddb9068c0!8m2!3d-12.2310166!4d-38.9693035!16s%2Fg%2F11b7cbghvd?entry=ttu'>
                 <img  alt='' src={loc}/>
+                </a>
                 <li>
                   <FiMapPin id='icon-locarion-info-size' />
                   <span>Av. Eduardo Fróes da Mota, 5000

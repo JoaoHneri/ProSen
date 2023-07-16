@@ -14,7 +14,7 @@ import Footer from "../../Footer/Footer";
 import NavBar from "../../Navbar/Navbar";
 import Banner4 from "../../Section-Banner/Banner4";
 import "../../Styles/EventoByID.css";
-import Tabela from "../../Tabela/Tabela";
+import Tabela2 from "../../Tabela/Tabela2";
 
 const EventoById = () => {
   const [Event, setEvent] = useState();
@@ -65,7 +65,7 @@ const EventoById = () => {
         <div className="details">
           <p>
             <img src={DateIcon} alt="Data do Evento" className="m-1" />
-            25/05/2023
+            {Event ? formatarDataBrasileira(Event.startDate) : "Carregando"}
           </p>
 
           <p>
@@ -161,7 +161,7 @@ const EventoById = () => {
           </div>
         </div>
         <div className="sessionTable">
-          <Tabela projetoFiltrado={projetoFiltrado} />
+          <Tabela2 projetoFiltrado={projetoFiltrado} />
           <div className="seeButton finish">
             <Link to={"/repositorios"}>
               <button className="buttonCards">Carregar mais</button>

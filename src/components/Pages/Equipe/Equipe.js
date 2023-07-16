@@ -49,8 +49,12 @@ function Equipe() {
               <br /> Gerenciais (MIS) na empresa Tel Centro de Contatos.
             </p>
             <div id="icons-divs">
+              <a href="mailto:erik_marques@hotmail.com">
               <AiOutlineMail id="icons-equipe" />
+              </a>
+              <a href="https://www.linkedin.com/in/erik-do-carmo-marques-a11289145/">
               <AiFillLinkedin id="icons-equipe" />
+              </a>
             </div>
           </div>
         </div>
@@ -73,8 +77,12 @@ function Equipe() {
               outros.
             </p>
             <div id="icons-divs-2">
+            <a href="mailto:ingrid.passos@fieb.org.br">
               <AiOutlineMail id="icons-equipe" />
+              </a>
+              <a href="https://www.linkedin.com/in/ingridbarreto/">
               <AiFillLinkedin id="icons-equipe" />
+              </a>
             </div>
           </div>
         </div>
@@ -91,11 +99,16 @@ function Equipe() {
           <div class="container edit1">
             <h4 id="edit-tx-h4">Welber Lima de Brito Guimarães</h4>
             <p id="edit-tx">
-            Graduado em Administração, Pós-Graduado em Gestão Empresarial, iniciei minha trajetória profissional<br/> como Estagiário do SENAI, me tornei Assistente Administrativo, depois Analista de Suporte ao Negócio, <br/>atuei como Coordenador de Cursos na Região Norte e atualmente exerço a função de Coordenador de Cursos <br/>nas áreas de Gestão e Tecnologia da Informação no SENAI Feira de Santana.
+            Graduado em Administração, Pós-Graduado em Gestão Empresarial, iniciou a trajetória profissional<br/> como Estagiário do SENAI, e se tornou Assistente Administrativo, depois Analista de Suporte ao Negócio,<br/> também já atuou como Coordenador de Cursos na Região Norte e atualmente exerce a função de Coordenador de Cursos nas <br/> áreas de Gestão e Tecnologia da Informação no SENAI Feira de Santana. 
+          
             </p>
             <div id="icons-divs">
+            <a href="mailto:welber.91.wl@gmail.com">
               <AiOutlineMail id="icons-equipe" />
+              </a>
+              <a href="https://www.linkedin.com/in/welber-lima-de-brito-guimar%C3%A3es-295183169/">
               <AiFillLinkedin id="icons-equipe" />
+              </a>
             </div>
           </div>
         </div>
@@ -245,11 +258,7 @@ function Equipe() {
           <div class="container edit1-v2">
             <h4 id="edit-tx-h4-v2">Silas Silva Lima de Matos</h4>
             <p id="edit-tx-v2">
-              Estudante dedicado do curso de desenvolvimento de sistemas no
-              Senai, com experiência em JavaScript, Node.js, React.js e MongoDB.
-              Sua paixão pela tecnologia e busca contínua de conhecimento o
-              tornam um promissor desenvolvedor em ascensão,pronto para
-              enfrentar desafios e contribuir com soluções inovadoras.
+            Sou um desenvolvedor formado pelo Senai no curso técnico em desenvolvimento de sistemas, com experiência em JavaScript, Node.js, React.js e MongoDB, e atualmente estou cursando análise e desenvolvimento de sistemas. Estou pronto para enfrentar desafios e contribuir com soluções inovadoras, sempre em busca de conhecimento e crescimento profissional.
             </p>
             <div id="icons-divs-2">
               <AiOutlineMail id="icons-equipe" />

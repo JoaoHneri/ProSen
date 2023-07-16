@@ -43,22 +43,22 @@ function Footer(){
             <div className="footer-column">
               <ul className="social-icons">
                 <li>
-                  <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.facebook.com/SENAIBahia/?locale=pt_BR" target="_blank" rel="noopener noreferrer">
                     <FaFacebook />
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://twitter.com/SENAInacional" target="_blank" rel="noopener noreferrer">
                     <FaTwitter />
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.instagram.com/senaibahia/?hl=pt-br" target="_blank" rel="noopener noreferrer">
                     <FaInstagram />
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com"  target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/school/senaicimatec/"  target="_blank" rel="noopener noreferrer">
                     <AiFillLinkedin />
                   </a>
                 </li>

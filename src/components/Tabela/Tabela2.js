@@ -30,7 +30,7 @@ const Tabela2 = ({ projetoFiltrado }) => {
   const handlePDFClick = (projeto) => {
     if (userData.logado) {
       window.open(
-        `${process.env.REACT_APP_API}temp/uploads/${projeto.src.key}`,
+        `${process.env.REACT_APP_API}/temp/uploads/${projeto.src.key}`,
         "_blank"
       );
     } else {
@@ -82,7 +82,7 @@ const Tabela2 = ({ projetoFiltrado }) => {
                     <a
                       target="_blank"
                       rel="noreferrer"
-                      href={`${process.env.REACT_APP_API}temp/uploads/${projeto.src.key}`}
+                      href={`${process.env.REACT_APP_API}/temp/uploads/${projeto.src.key}`}
                     >
                       <img src={pdf} alt="PDF" />
                     </a>

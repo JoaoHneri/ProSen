@@ -114,7 +114,7 @@ const Tabela = ({ projetoFiltrado }) => {
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href={`${process.env.REACT_APP_API}temp/uploads/${projeto.src.key}`}
+                    href={`${process.env.REACT_APP_API}/temp/uploads/${projeto.src.key}`}
                   >
                     <img src={pdf} alt="PDF" />
                   </a>

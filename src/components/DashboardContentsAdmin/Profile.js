@@ -31,7 +31,7 @@ function Profile() {
           <div class="avatar">
           {user && user.file && user.file.key ? (
               <img
-                src={`${process.env.REACT_APP_API}temp/uploads/${user.file.key}`}
+                src={`${process.env.REACT_APP_API}/temp/uploads/${user.file.key}`}
                 alt="Descrição da imagem"
               />
             ) : (

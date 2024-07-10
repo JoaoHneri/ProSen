@@ -99,7 +99,7 @@ const EventoById = () => {
               ? Event.src.map((event) => (
                   <img
                     className="imageToPost"
-                    src={`${process.env.REACT_APP_API}temp/uploads/${event.key}`}
+                    src={`${process.env.REACT_APP_API}/temp/uploads/${event.key}`}
                     alt="Fotos do Evento"
                   />
                 ))
@@ -120,7 +120,7 @@ const EventoById = () => {
               ? Event.video.map((event) => (
                   <video
                     className="vidInt"
-                    src={`${process.env.REACT_APP_API}temp/uploads/${event.key}`}
+                    src={`${process.env.REACT_APP_API}/temp/uploads/${event.key}`}
                     controls
                   >
                     Seu navegador não suporta a tag de vídeo.
